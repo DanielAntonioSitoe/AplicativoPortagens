@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Aplicativo Portagens</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuracoes</string>
+
+    <string name="menu_home">Aplicativo Portagens</string>
+    <string name="monitorar_equioamentos">Monitorar Equipamentos</string>
+    <string name="menu_meuTurno">Meu Turno</string>
+    <string name="menu_minhasNotificacoes">Minhas Notificacoes</string>
+    <string name="menu_solicitacoes">Solicitacoes</string>
+    <string name="menu_reportar">Reportar Problema</string>
+    <string name="title_activity_teste">teste</string>
+    <string name="logout">LogOut</string>
+    <string name="title_activity_logout">Login</string>
+</resources>

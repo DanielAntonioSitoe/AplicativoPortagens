@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/monitorar_equipamentos"
+            android:title="Monitorar Equipamentos" />
+        <item
+            android:id="@+id/nav_reportar"
+            android:title="Reportar Problema" />
+        <item
+            android:id="@+id/nav_solicitacoes"
+            android:title="Solicitacoes" />
+    </group>
+
+    <item android:title="Minha Informacao">
+        <menu>
+            <item
+                android:id="@+id/nav_meuTurno"
+                android:title="Meu Turno" />
+            <item
+                android:id="@+id/nav_minhasNotificacoes"
+                android:title="Minhas Notificacaoes" />
+            <item
+                android:id="@+id/nav_sair"
+                android:title="LogOut" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.monitorar.PistasFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="12dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/pista1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista1" />
+
+
+            <Button
+                android:id="@+id/pista2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista2" />
+
+            <Button
+                android:id="@+id/pista3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista3" />
+
+            <Button
+                android:id="@+id/pista4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista4" />
+            <Button
+                android:id="@+id/pista5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista5" />
+            <Button
+                android:id="@+id/pista6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista6" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_margin="12dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/pista7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista7" />
+
+
+            <Button
+                android:id="@+id/pista8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista8" />
+
+            <Button
+                android:id="@+id/pista9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista9" />
+
+            <Button
+                android:id="@+id/pista10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista10" />
+            <Button
+                android:id="@+id/pista11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista11" />
+
+            <Button
+                android:id="@+id/pista12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:paddingVertical="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@android:color/white"
+                android:text="Pista12" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

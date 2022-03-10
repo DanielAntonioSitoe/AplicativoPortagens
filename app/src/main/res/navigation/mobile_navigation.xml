@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.aplicativoportagens.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/monitorar_equipamentos"
+        android:name="com.example.aplicativoportagens.ui.monitorar.MonitorarFragment"
+        android:label="@string/monitorar_equioamentos"
+        tools:layout="@layout/fragment_monitorar" />
+
+    <fragment
+        android:id="@+id/nav_meuTurno"
+        android:name="com.example.aplicativoportagens.ui.meuTurno.MeuTurnoFragment"
+        android:label="@string/menu_meuTurno"
+        tools:layout="@layout/fragment_meuturno" />
+
+    <fragment
+        android:id="@+id/nav_minhasNotificacoes"
+        android:name="com.example.aplicativoportagens.ui.minhasNotificacoes.MinhasNotificacoesFragment"
+        android:label="@string/menu_minhasNotificacoes"
+        tools:layout="@layout/minhasnotificacoes" />
+    <activity
+        android:id="@+id/nav_sair"
+        android:name="com.example.aplicativoportagens.logout"
+        android:label="@string/logout"
+        tools:layout="@layout/content_logout" />
+
+    <fragment
+        android:id="@+id/nav_solicitacoes"
+        android:name="com.example.aplicativoportagens.ui.solicitacoes.SolicitacoesFragment"
+        android:label="@string/menu_solicitacoes"
+        tools:layout="@layout/fragment_solicitacoes" />
+
+    <fragment
+        android:id="@+id/nav_reportar"
+        android:name="com.example.aplicativoportagens.ui.reportar.ReportarFragment"
+        android:label="@string/menu_reportar"
+        tools:layout="@layout/fragment_reportar" />
+    <fragment
+        android:id="@+id/nav_salas"
+        android:name="com.example.aplicativoportagens.ui.monitorar.salas"
+        android:label="@string/monitorar_equioamentos"
+        tools:layout="@layout/salas_fragment" />
+    <fragment
+        android:id="@+id/nav_listarEquipamentos"
+        android:name="com.example.aplicativoportagens.ui.monitorar.salas"
+        android:label="@string/monitorar_equioamentos"
+        tools:layout="@layout/lista_equipamentos_fragment" />
+</navigation>
