@@ -40,20 +40,20 @@
             android:textColor="#004570"
             android:textSize="12sp"></TextView>
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="1dp"
-            android:background="@drawable/custom_button"
-            android:textColor="@android:color/white"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:textStyle="bold"
-            android:text="Abrir" />
+<!--        <Button-->
+<!--            android:id="@+id/button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginTop="1dp"-->
+<!--            android:background="@drawable/custom_button"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:text="Abrir" />-->
 
         <CheckBox
             android:id="@+id/checkBox"

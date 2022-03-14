@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         client = LocationServices.getFusedLocationProviderClient(this);
-        Controler controler = new Controler();
-        controler.inicializarDados();
+//        Controler controler = new Controler();
+//        controler.inicializarDados();
 
     }
 
