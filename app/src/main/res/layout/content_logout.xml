@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -35,7 +35,7 @@
             android:text=" Senha" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/senha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

@@ -32,7 +32,7 @@ public class Controler {
 
   public void inicializarDados(){
       for(int i=0;i<=4;i++){
-          usuario= new Usuario(0,"Daniel"+i,847464+i);
+          usuario= new Usuario(0,"Daniel"+i,847464+i,"daniel","1234");
           usuarioDAO.salvar(usuario);
           portagem = new Portagem(0,"Portagem Costa do Sol",-25.123,25.4332);
           portagemDAO.salvar(portagem);

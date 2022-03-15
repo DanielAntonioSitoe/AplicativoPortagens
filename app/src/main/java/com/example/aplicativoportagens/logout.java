@@ -7,7 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.aplicativoportagens.Controle.UsuarioDAO;
+import com.example.aplicativoportagens.modelo.Usuario;
+
 public class logout extends AppCompatActivity {
+    Usuario usuario;
+    UsuarioDAO usuarioDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +28,26 @@ public class logout extends AppCompatActivity {
         btnFragment3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(logout.this,MainActivity.class));
+
+//                usuario = new Usuario(3,"Daniel",847464965,"Daniel","1234");
+                TextView username = findViewById(R.id.usuario);
+                TextView password = findViewById(R.id.senha);
+                usuarioDAO = new UsuarioDAO();
+                usuario = usuarioDAO.buscarUm(username.getText().toString(),password.getText().toString());
+                Intent intent = new Intent(logout.this, MainActivity.class);
+                intent.putExtra("id",usuario.getId());
+                startActivity(intent);
             }
         });
 
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

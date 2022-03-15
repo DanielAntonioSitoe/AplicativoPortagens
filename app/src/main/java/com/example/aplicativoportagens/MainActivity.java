@@ -1,6 +1,7 @@
 package com.example.aplicativoportagens;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -14,7 +15,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.aplicativoportagens.Controle.Controler;
+import com.example.aplicativoportagens.Controle.UsuarioDAO;
+import com.example.aplicativoportagens.modelo.Usuario;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,12 +25,10 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean adicionar = true;
     private TextView tempAtual;
     private TextView tempAtual2;
+    Usuario idUsuario;
+    UsuarioDAO usuarioDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +65,24 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
+        Intent intent = getIntent();
+        usuarioDAO = new UsuarioDAO();
+        String username = intent.getStringExtra("username");
+        String password = intent.getStringExtra("password");
+        idUsuario = usuarioDAO.buscarUm(username,password);
         client = LocationServices.getFusedLocationProviderClient(this);
 //        Controler controler = new Controler();
 //        controler.inicializarDados();
 
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override

@@ -71,22 +71,22 @@ public class UsuarioDAO {
 
     }
 
-    public Usuario buscarUm(int codigo) {
-        Usuario bairro = null;
-        try {
-            Vector<Usuario> lst = new Vector<Usuario>();
-            FileInputStream arquivo = new FileInputStream("usuario.arq");
-            ObjectInputStream objecto = new ObjectInputStream(arquivo);
-            lst = (Vector<Usuario>) objecto.readObject();
-            for (int i = 0; i < lst.size(); i++) {
-                if (lst.get(i).getId() == codigo) {
-                    bairro = lst.get(i);
-                }
-            }
-        } catch (Exception erro) {
-            erro.printStackTrace();
-//            JOptionPane.showMessageDialog(null, " Erro de Leitura: " + erro.getMessage());
-        }
+    public Usuario buscarUm(String username, String password) {
+        Usuario bairro = new Usuario(3,"Daniel",847464965,"Daniel","1234");
+//        try {
+//            Vector<Usuario> lst = new Vector<Usuario>();
+//            FileInputStream arquivo = new FileInputStream("usuario.arq");
+//            ObjectInputStream objecto = new ObjectInputStream(arquivo);
+//            lst = (Vector<Usuario>) objecto.readObject();
+//            for (int i = 0; i < lst.size(); i++) {
+//                if (lst.get(i).getId() == codigo) {
+//                    bairro = lst.get(i);
+//                }
+//            }
+//        } catch (Exception erro) {
+//            erro.printStackTrace();
+////            JOptionPane.showMessageDialog(null, " Erro de Leitura: " + erro.getMessage());
+//        }
         return bairro;
     }
 
