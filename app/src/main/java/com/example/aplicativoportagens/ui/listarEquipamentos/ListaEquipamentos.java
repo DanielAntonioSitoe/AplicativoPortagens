@@ -23,7 +23,8 @@ public class ListaEquipamentos extends Fragment {
     String tela;
     int size = 12;
     ArrayAdapter<String> adapter;
-    String[] cameras = {"camera1","camera2","camera3","camera4","camera5","camera6","camera7","camera8","camera9","camera10","camera11","camera12"};
+    String[] cameras;
+//            = {"camera1","camera2","camera3","camera4","camera5","camera6","camera7","camera8","camera9","camera10","camera11","camera12"};
     Boolean[] selecionados = {false,false,false,false,false,false,false,false,false,false,false,false};
     EquipamentosDAO equipamentosDAO = new EquipamentosDAO();
     List<Equipamentos> bairros = null;
@@ -35,6 +36,13 @@ public class ListaEquipamentos extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lista_equipamentos_fragment, container, false);
+
+        bairros = equipamentosDAO.buscarTodos();
+        cameras = new String[bairros.size()];
+        for (int i = 0; i < bairros.size(); i++) {
+            cameras[i]=bairros.get(i).getDescricao();
+        }
+
         listView = view.findViewById(R.id.listview);
         adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_multiple_choice,cameras);
         listView.setAdapter(adapter);

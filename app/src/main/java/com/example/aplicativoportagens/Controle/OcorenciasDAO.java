@@ -1,6 +1,9 @@
 package com.example.aplicativoportagens.Controle;
 
+import android.util.Log;
+
 import com.example.aplicativoportagens.modelo.Ocorencias;
+import com.example.aplicativoportagens.modelo.Solicitacoes;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,9 +12,36 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Vector;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class OcorenciasDAO {
 
     public Boolean salvar(Ocorencias v) {
+
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<Ocorencias> call = apiInterface.getGravarOcorencias(v.getDescricao(),v.getTipo(),v.getEstadoActual(),
+                "2020-01-03",v.getObservacoes(),v.getMetodoResolucao(),
+                v.getUsuario().getId()+"","1");
+        call.enqueue(new Callback<Ocorencias>() {
+            @Override
+            public void onResponse(Call<Ocorencias> call, Response<Ocorencias> response) {
+                Log.e(TAG,"onResponse: "+response.code());
+//                Log.e(TAG,"onResponse: descricao"+response.body().getDescricao());
+//                Log.e(TAG,"onResponse: estado"+response.body().getEstado());
+//                Log.e(TAG,"onResponse: data"+response.body().getData());
+//                Log.e(TAG,"onResponse: user_id"+response.body().getUsuario().getId());
+            }
+
+            @Override
+            public void onFailure(Call<Ocorencias> call, Throwable t) {
+                Log.e(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+
 
 //        try {
 //            Vector<Ocorencias> lst = new Vector<>();

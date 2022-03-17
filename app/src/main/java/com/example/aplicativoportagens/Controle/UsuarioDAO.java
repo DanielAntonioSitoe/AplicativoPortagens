@@ -72,7 +72,7 @@ public class UsuarioDAO {
     }
 
     public Usuario buscarUm(String username, String password) {
-        Usuario bairro = new Usuario(3,"Daniel",847464965,"Daniel","1234");
+        Usuario bairro = new Usuario(1,"Daniel",847464965,"Daniel","1234");
 //        try {
 //            Vector<Usuario> lst = new Vector<Usuario>();
 //            FileInputStream arquivo = new FileInputStream("usuario.arq");

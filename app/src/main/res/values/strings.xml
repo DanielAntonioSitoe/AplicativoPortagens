@@ -8,7 +8,7 @@
     <string name="action_settings">Configuracoes</string>
 
     <string name="menu_home">Aplicativo Portagens</string>
-    <string name="monitorar_equioamentos">Selecione Equipamentos Ativos</string>
+    <string name="monitorar_equioamentos">Equipamentos Ativos</string>
     <string name="menu_meuTurno">Meu Turno</string>
     <string name="menu_minhasNotificacoes">Minhas Notificacoes</string>
     <string name="menu_solicitacoes">Solicitacoes</string>

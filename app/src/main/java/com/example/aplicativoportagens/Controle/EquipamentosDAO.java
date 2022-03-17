@@ -1,8 +1,10 @@
 package com.example.aplicativoportagens.Controle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.aplicativoportagens.MainActivity;
 import com.example.aplicativoportagens.modelo.Equipamentos;
+import com.example.aplicativoportagens.modelo.Ocorencias;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.FileInputStream;
@@ -11,6 +13,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Vector;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class EquipamentosDAO {
 
@@ -62,17 +70,42 @@ public class EquipamentosDAO {
 
     public List<Equipamentos> buscarTodos() {
         List<Equipamentos> bairro = null;
-        try {
-            Vector<Equipamentos> lst = new Vector<Equipamentos>();
-            FileInputStream arquivo = new FileInputStream("equipamentos.arq");
-            ObjectInputStream objecto = new ObjectInputStream(arquivo);
-            lst = (Vector<Equipamentos>) objecto.readObject();
-            bairro = lst;
-        } catch (Exception erro) {
-            Snackbar.make(null, "Falha", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            erro.printStackTrace();
-        }
+
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<Equipamentos> call = apiInterface.getBuscarEquipamentos();
+        call.enqueue(new Callback<Equipamentos>() {
+            @Override
+            public void onResponse(Call<Equipamentos> call, Response<Equipamentos> response) {
+                Equipamentos equipamentos = new Equipamentos(response.body().getId(),response.body().getDescricao(),
+                        response.body().getTipo(),response.body().getEstado(),
+                        response.body().getLocalizacao(),response.body().getPortagem());
+                bairro.add(equipamentos);
+                Log.e(TAG,"onResponse: "+response.code());
+//                Log.e(TAG,"onResponse: descricao"+response.body().getDescricao());
+//                Log.e(TAG,"onResponse: estado"+response.body().getEstado());
+//                Log.e(TAG,"onResponse: data"+response.body().getData());
+//                Log.e(TAG,"onResponse: user_id"+response.body().getUsuario().getId());
+            }
+
+            @Override
+            public void onFailure(Call<Equipamentos> call, Throwable t) {
+                Log.e(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+
+
+
+//        try {
+//            Vector<Equipamentos> lst = new Vector<Equipamentos>();
+//            FileInputStream arquivo = new FileInputStream("equipamentos.arq");
+//            ObjectInputStream objecto = new ObjectInputStream(arquivo);
+//            lst = (Vector<Equipamentos>) objecto.readObject();
+//            bairro = lst;
+//        } catch (Exception erro) {
+//            Snackbar.make(null, "Falha", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
+//            erro.printStackTrace();
+//        }
         return bairro;
 
     }
