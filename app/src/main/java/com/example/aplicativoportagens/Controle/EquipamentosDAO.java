@@ -3,6 +3,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.aplicativoportagens.MainActivity;
+import com.example.aplicativoportagens.modelo.BuscarEquipamentos;
 import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.Ocorencias;
 import com.google.android.material.snackbar.Snackbar;
@@ -11,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -69,17 +71,23 @@ public class EquipamentosDAO {
     }
 
     public List<Equipamentos> buscarTodos() {
-        List<Equipamentos> bairro = null;
+        List<Equipamentos> bairro = new ArrayList<>();
 
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<Equipamentos> call = apiInterface.getBuscarEquipamentos();
-        call.enqueue(new Callback<Equipamentos>() {
+        Call<List<Equipamentos>> call = apiInterface.getBuscarEquipamentos();
+        call.enqueue(new Callback<List<Equipamentos>>() {
             @Override
-            public void onResponse(Call<Equipamentos> call, Response<Equipamentos> response) {
-                Equipamentos equipamentos = new Equipamentos(response.body().getId(),response.body().getDescricao(),
-                        response.body().getTipo(),response.body().getEstado(),
-                        response.body().getLocalizacao(),response.body().getPortagem());
-                bairro.add(equipamentos);
+            public void onResponse(Call<List<Equipamentos>> call, Response<List<Equipamentos>> response) {
+                List<Equipamentos> list = response.body();
+                for (int i = 0; i < list.size(); i++) {
+                    Log.e(TAG,"onResponse: descricao"+list.get(i).getDescricao());
+                Log.e(TAG,"onResponse: estado"+list.get(i).getEstado());
+                    bairro.add(list.get(i));
+                }
+//                Equipamentos equipamentos = new Equipamentos(response.body().getId(),response.body().getDescricao(),
+//                        response.body().getTipo(),response.body().getEstado(),
+//                        response.body().getLocalizacao(),response.body().getPortagem());
+//                bairro.add(equipamentos);
                 Log.e(TAG,"onResponse: "+response.code());
 //                Log.e(TAG,"onResponse: descricao"+response.body().getDescricao());
 //                Log.e(TAG,"onResponse: estado"+response.body().getEstado());
@@ -88,7 +96,7 @@ public class EquipamentosDAO {
             }
 
             @Override
-            public void onFailure(Call<Equipamentos> call, Throwable t) {
+            public void onFailure(Call<List<Equipamentos>> call, Throwable t) {
                 Log.e(TAG, "onFailure: "+t.getMessage());
             }
         });

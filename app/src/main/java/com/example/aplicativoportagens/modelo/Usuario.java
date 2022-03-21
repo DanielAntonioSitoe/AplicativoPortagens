@@ -1,6 +1,8 @@
 package com.example.aplicativoportagens.modelo;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable{
     int id;
     String nome;
     double contacto;
@@ -13,6 +15,9 @@ public class Usuario {
         this.contacto = contacto;
         this.username = username;
         this.senha = senha;
+    }
+
+    public Usuario() {
     }
 
     public String getUsername() {

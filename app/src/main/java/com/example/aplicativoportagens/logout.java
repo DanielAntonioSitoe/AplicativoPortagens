@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.example.aplicativoportagens.Controle.UsuarioDAO;
 import com.example.aplicativoportagens.modelo.Usuario;
 
+import java.io.Serializable;
+
 public class logout extends AppCompatActivity {
     Usuario usuario;
     UsuarioDAO usuarioDAO;
@@ -35,7 +37,7 @@ public class logout extends AppCompatActivity {
                 usuarioDAO = new UsuarioDAO();
                 usuario = usuarioDAO.buscarUm(username.getText().toString(),password.getText().toString());
                 Intent intent = new Intent(logout.this, MainActivity.class);
-                intent.putExtra("id",usuario.getId());
+                intent.putExtra("nome",usuario);
                 startActivity(intent);
             }
         });

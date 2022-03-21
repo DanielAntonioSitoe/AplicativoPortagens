@@ -3,8 +3,9 @@ package com.example.aplicativoportagens.Controle;
 import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.Ocorencias;
 import com.example.aplicativoportagens.modelo.Solicitacoes;
+import com.example.aplicativoportagens.modelo.Usuario;
 
-import java.util.Date;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -31,8 +32,12 @@ public interface ApiInterface {
                                          @Field("user_id") String idusuario,
                                          @Field("equipamento_id") String idEquipameno);
 
+    @FormUrlEncoded
+    @POST("/api/user_log")
+    Call<Usuario> getLogin(@Field("email") String email,
+                                      @Field("password") String password);
 
     @GET("api/equipamentos")
-    Call<Equipamentos> getBuscarEquipamentos();
+    Call<List<Equipamentos>> getBuscarEquipamentos();
 
 }

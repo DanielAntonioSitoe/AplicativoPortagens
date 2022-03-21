@@ -64,4 +64,9 @@ public class Equipamentos {
     public void setPortagem(Portagem portagem) {
         this.portagem = portagem;
     }
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
 }

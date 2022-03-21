@@ -67,11 +67,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        usuarioDAO = new UsuarioDAO();
-        String username = intent.getStringExtra("username");
-        String password = intent.getStringExtra("password");
-        idUsuario = usuarioDAO.buscarUm(username,password);
+//        usuarioDAO = new UsuarioDAO();
+        idUsuario = (Usuario) intent.getSerializableExtra("nome");
         client = LocationServices.getFusedLocationProviderClient(this);
+
 //        Controler controler = new Controler();
 //        controler.inicializarDados();
 
@@ -163,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 if(adicionar){
                     tempAtual.setText(portagem);
+                    TextView textView= findViewById(R.id.userName);
+                    textView.setText(idUsuario.getNome());
                     adicionar = false;
                 }
                 handler.postDelayed(this,1000);

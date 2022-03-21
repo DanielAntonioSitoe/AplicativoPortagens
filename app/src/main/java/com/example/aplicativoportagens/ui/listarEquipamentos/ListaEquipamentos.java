@@ -1,9 +1,13 @@
 package com.example.aplicativoportagens.ui.listarEquipamentos;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,22 +18,25 @@ import com.example.aplicativoportagens.Controle.EquipamentosDAO;
 import com.example.aplicativoportagens.R;
 import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListaEquipamentos extends Fragment {
 
     private ListaEquipamentosViewModel mViewModel;
     ListView listView;
+    View view;
     String tela;
     int size = 12;
-    ArrayAdapter<String> adapter;
-    String[] cameras;
+    ArrayAdapter<Equipamentos> adapter;
+    ArrayList<Equipamentos> cameras;
 //            = {"camera1","camera2","camera3","camera4","camera5","camera6","camera7","camera8","camera9","camera10","camera11","camera12"};
     Boolean[] selecionados = {false,false,false,false,false,false,false,false,false,false,false,false};
     EquipamentosDAO equipamentosDAO = new EquipamentosDAO();
-    List<Equipamentos> bairros = null;
+    List<Equipamentos> ListaDeEquipamentos = null;
     Button enviarCheckList;
-
+    private Context a;
 
 
     @Override
@@ -37,16 +44,10 @@ public class ListaEquipamentos extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lista_equipamentos_fragment, container, false);
 
-        bairros = equipamentosDAO.buscarTodos();
-        cameras = new String[bairros.size()];
-        for (int i = 0; i < bairros.size(); i++) {
-            cameras[i]=bairros.get(i).getDescricao();
-        }
 
-        listView = view.findViewById(R.id.listview);
-        adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_multiple_choice,cameras);
-        listView.setAdapter(adapter);
-
+        this.view = view;
+        a=getContext();
+        runtimer();
         return view;
     }
 
@@ -73,7 +74,7 @@ public class ListaEquipamentos extends Fragment {
             @Override
             public void onClick(View v) {
                 String itemSelected = "Selecionados: \n";
-                for (int i = 0; i < cameras.length; i++) {
+                for (int i = 0; i < cameras.size(); i++) {
                     if(listView.isItemChecked(i)){
                         itemSelected+= listView.getItemAtPosition(i)+"\n";
                     }
@@ -81,6 +82,31 @@ public class ListaEquipamentos extends Fragment {
                 Snackbar.make(v,itemSelected,Snackbar.LENGTH_LONG).show();
             }
         });
+    }
+
+    private Boolean runtimer(){
+        final Handler handler = new Handler();
+        ListaDeEquipamentos = equipamentosDAO.buscarTodos();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if(ListaDeEquipamentos !=null){
+                    int size = ListaDeEquipamentos.size();
+                    cameras = new ArrayList<Equipamentos>(size);
+                    for (int i = 0; i < size; i++) {
+                        cameras.add(ListaDeEquipamentos.get(i));
+                    }
+                    listView = view.findViewById(R.id.listview);
+                    adapter = new ArrayAdapter<Equipamentos>(a,android.R.layout.simple_list_item_multiple_choice,cameras);
+                    listView.setAdapter(adapter);
+
+                }
+                handler.postDelayed(this,1000);
+
+            }
+        });
+
+        return null;
     }
 
 
