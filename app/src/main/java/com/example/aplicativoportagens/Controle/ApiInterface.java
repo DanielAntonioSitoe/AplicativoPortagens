@@ -1,6 +1,7 @@
 package com.example.aplicativoportagens.Controle;
 
 import com.example.aplicativoportagens.modelo.Equipamentos;
+import com.example.aplicativoportagens.modelo.LogedUser;
 import com.example.aplicativoportagens.modelo.Ocorencias;
 import com.example.aplicativoportagens.modelo.Solicitacoes;
 import com.example.aplicativoportagens.modelo.Usuario;
@@ -34,8 +35,8 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("/api/user_log")
-    Call<Usuario> getLogin(@Field("email") String email,
-                                      @Field("password") String password);
+    Call<LogedUser> getLogin(@Field("email") String email,
+                             @Field("password") String password);
 
     @GET("api/equipamentos")
     Call<List<Equipamentos>> getBuscarEquipamentos();

@@ -30,15 +30,15 @@ public class Controler {
   Notificacoes notificacoes;
 
 
-  public void inicializarDados(){
-      for(int i=0;i<=4;i++){
-          usuario= new Usuario(0,"Daniel"+i,847464+i,"daniel","1234");
-          usuarioDAO.salvar(usuario);
-          portagem = new Portagem(0,"Portagem Costa do Sol",-25.123,25.4332);
-          portagemDAO.salvar(portagem);
-          equipamentos = new Equipamentos(0,"Camera ANPR "+i,"Camera","Ativo","Cabine1",portagemDAO.buscarUm(i+1));
-          equipamentosDAO.salvar(equipamentos);
-      }
-
-  }
+//  public void inicializarDados(){
+//      for(int i=0;i<=4;i++){
+//          usuario= new Usuario(0,"Daniel"+i,847464+i,"daniel","1234");
+//          usuarioDAO.salvar(usuario);
+//          portagem = new Portagem(0,"Portagem Costa do Sol",-25.123,25.4332);
+//          portagemDAO.salvar(portagem);
+//          equipamentos = new Equipamentos(0,"Camera ANPR "+i,"Camera","Ativo","Cabine1",portagemDAO.buscarUm(i+1));
+//          equipamentosDAO.salvar(equipamentos);
+//      }
+//
+//  }
 }

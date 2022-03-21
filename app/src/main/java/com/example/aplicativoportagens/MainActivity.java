@@ -14,9 +14,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.example.aplicativoportagens.Controle.UsuarioDAO;
 import com.example.aplicativoportagens.modelo.Usuario;
+import com.example.aplicativoportagens.ui.OpenDialog;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +27,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import java.io.IOException;
 import java.util.List;
@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView tempAtual;
     private TextView tempAtual2;
     Usuario idUsuario;
-    UsuarioDAO usuarioDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +63,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-
         Intent intent = getIntent();
-//        usuarioDAO = new UsuarioDAO();
         idUsuario = (Usuario) intent.getSerializableExtra("nome");
+        atualizarNome();
         client = LocationServices.getFusedLocationProviderClient(this);
-
-//        Controler controler = new Controler();
-//        controler.inicializarDados();
-
     }
 
     public Usuario getIdUsuario() {
@@ -89,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    public  void  atualizarNome(){
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View heaerView = navigationView.getHeaderView(0);
+        TextView userName = heaerView.findViewById(R.id.userName);
+        TextView userPortagem = heaerView.findViewById(R.id.userPortagem);
+        userPortagem.setText(portagem);
+        userName.setText(idUsuario.getNome());
     }
 
     @Override
@@ -142,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                             portagem="Portagem Matola Gare";
                         }else{
                             portagem="Portagem nao Identificada";
+                            openDialog();
                         }
                         tempAtual2.setText(latitude+" "+longitude);
                         runtimer();
@@ -149,11 +152,15 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }else{
-
+                    openDialog();
                     tempAtual2.setText("Localizacao nao detectada.");
                 }
             }
         });
+    }
+    public void openDialog(){
+        OpenDialog openDialog = new OpenDialog();
+        openDialog.show(getSupportFragmentManager(),"Portagem nao Identificada");
     }
     private void runtimer(){
         final Handler handler = new Handler();
@@ -162,8 +169,6 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 if(adicionar){
                     tempAtual.setText(portagem);
-                    TextView textView= findViewById(R.id.userName);
-                    textView.setText(idUsuario.getNome());
                     adicionar = false;
                 }
                 handler.postDelayed(this,1000);

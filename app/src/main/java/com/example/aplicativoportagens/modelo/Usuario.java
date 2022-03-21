@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class Usuario implements Serializable{
     int id;
-    String nome;
+    String name;
     double contacto;
-    String username;
+    String email;
     String senha;
 
     public Usuario(int id, String nome, double contacto, String username, String senha) {
         this.id = id;
-        this.nome = nome;
+        this.name = nome;
         this.contacto = contacto;
-        this.username = username;
+        this.email = username;
         this.senha = senha;
     }
 
@@ -21,11 +21,11 @@ public class Usuario implements Serializable{
     }
 
     public String getUsername() {
-        return username;
+        return email;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.email = username;
     }
 
     public String getSenha() {
@@ -45,11 +45,11 @@ public class Usuario implements Serializable{
     }
 
     public String getNome() {
-        return nome;
+        return name;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.name = nome;
     }
 
     public double getContacto() {
