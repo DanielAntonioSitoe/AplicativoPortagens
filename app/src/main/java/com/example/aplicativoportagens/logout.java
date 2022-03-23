@@ -61,7 +61,7 @@ public class logout extends AppCompatActivity {
                         stop=true;
                     }
                 }else {
-                    textError.setText("Falha Verifique os Dados!");
+                    textError.setText("Falha, Verifique os Dados!");
                     usuario = usuarioDAO.getBairro();
                     stop = false;
                 }

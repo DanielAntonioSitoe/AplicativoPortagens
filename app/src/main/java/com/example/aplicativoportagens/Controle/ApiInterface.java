@@ -1,5 +1,6 @@
 package com.example.aplicativoportagens.Controle;
 
+import com.example.aplicativoportagens.modelo.CheckIn;
 import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.LogedUser;
 import com.example.aplicativoportagens.modelo.Ocorencias;
@@ -32,6 +33,12 @@ public interface ApiInterface {
                                          @Field("metodo_resolucao") String resolucao,
                                          @Field("user_id") String idusuario,
                                          @Field("equipamento_id") String idEquipameno);
+    @FormUrlEncoded
+    @POST("/api/check_in")
+    Call<CheckIn> getGravarCheckIn(@Field("user_id") int user_id,
+                                      @Field("portagem_id") int portagem_id,
+                                      @Field("data_inicio")String data_inicio,
+                                      @Field("data_fim") String data_fim);
 
     @FormUrlEncoded
     @POST("/api/user_log")

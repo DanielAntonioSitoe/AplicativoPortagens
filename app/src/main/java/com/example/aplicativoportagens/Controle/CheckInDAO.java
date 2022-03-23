@@ -1,6 +1,9 @@
 package com.example.aplicativoportagens.Controle;
 
+import android.util.Log;
+
 import com.example.aplicativoportagens.modelo.CheckIn;
+import com.example.aplicativoportagens.modelo.Solicitacoes;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,48 +12,33 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Vector;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class CheckInDAO {
 
     public CheckIn salvar(CheckIn v) {
 
-        try {
-            Vector<CheckIn> lst = new Vector<CheckIn>();
-            try {
-
-                FileInputStream arquivo = new FileInputStream("checkin.arq");
-                ObjectInputStream objecto = new ObjectInputStream(arquivo);
-                lst = (Vector<CheckIn>) objecto.readObject();
-            } catch (Exception erro) {
-//                JOptionPane.showMessageDialog(null, " Erro de Leitura: " + erro.getMessage());
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<CheckIn> call = apiInterface.getGravarCheckIn(v.getUsuario().getId(),v.getPortagem().getId(),"2020-01-03","2020-01-03");
+        call.enqueue(new Callback<CheckIn>() {
+            @Override
+            public void onResponse(Call<CheckIn> call, Response<CheckIn> response) {
+                Log.e(TAG,"onResponse: "+response.code());
+//                Log.e(TAG,"onResponse: descricao"+response.body().getDescricao());
+//                Log.e(TAG,"onResponse: estado"+response.body().getEstado());
+//                Log.e(TAG,"onResponse: data"+response.body().getData());
+//                Log.e(TAG,"onResponse: user_id"+response.body().getUsuario().getId());
             }
-            if (v.getId() != 0) {
-                for (int i = 0; i < lst.size(); i++) {
-                    if (lst.get(i).getId() == v.getId()) {
-                        lst.get(i).setHoraFinal(v.getHoraFinal());
-                        lst.get(i).setHoraInicial(v.getHoraInicial());
-                        lst.get(i).setUsuario(v.getUsuario());
-                        lst.get(i).setPortagem(v.getPortagem());
-                        break;
-                    }
-                }
 
-            } else {
-                if(lst.size()!=0){
-                    v.setId(lst.get(lst.size()-1).getId() + 1);
-                }else{
-                    v.setId(1);
-                }
-                lst.add(v);
+            @Override
+            public void onFailure(Call<CheckIn> call, Throwable t) {
+                Log.e(TAG, "onFailure: "+t.getMessage());
             }
-            FileOutputStream arquivo = new FileOutputStream("checkin.arq");
-            ObjectOutputStream objecto = new ObjectOutputStream(arquivo);
-            objecto.writeObject(lst);
-
-//            JOptionPane.showMessageDialog(null, " Gravacao bem sucedida ");
-        } catch (Exception erro) {
-
-//            JOptionPane.showMessageDialog(null, " Gravacao Falhou " + erro);
-        }
+        });
         return v;
 
     }

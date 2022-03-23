@@ -7,7 +7,7 @@ public class RetrofitClient {
     public  static Retrofit retrofit;
     public static Retrofit getRetrofitInstance(){
         if(retrofit==null){
-            retrofit = new Retrofit.Builder().baseUrl("http://192.168.58.1/").addConverterFactory(GsonConverterFactory.create()).build();
+            retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.192/").addConverterFactory(GsonConverterFactory.create()).build();
         }
         return retrofit;
     }

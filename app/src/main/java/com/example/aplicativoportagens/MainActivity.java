@@ -14,6 +14,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.example.aplicativoportagens.Controle.CheckInDAO;
+import com.example.aplicativoportagens.modelo.CheckIn;
+import com.example.aplicativoportagens.modelo.Portagem;
 import com.example.aplicativoportagens.modelo.Usuario;
 import com.example.aplicativoportagens.ui.OpenDialog;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -30,6 +34,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private double latitude;
     private double longitude;
-    private String portagem;
+    private String textPortagem;
     private boolean adicionar = true;
     private TextView tempAtual;
     private TextView tempAtual2;
     Usuario idUsuario;
+    Portagem portagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +95,9 @@ public class MainActivity extends AppCompatActivity {
         View heaerView = navigationView.getHeaderView(0);
         TextView userName = heaerView.findViewById(R.id.userName);
         TextView userPortagem = heaerView.findViewById(R.id.userPortagem);
-        userPortagem.setText(portagem);
+        userPortagem.setText(textPortagem);
         userName.setText(idUsuario.getNome());
+        saveCheckIn();
     }
 
     @Override
@@ -135,16 +142,16 @@ public class MainActivity extends AppCompatActivity {
                         latitude = addresses.get(0).getLatitude();
                         longitude = addresses.get(0).getLongitude();
                         if(((-25.78586<=latitude)&&(latitude<=-25.77329))&&((32.66390<=longitude)&&(longitude<=32.66568))){
-                            portagem="Portagem Zintava";
+                            textPortagem="Portagem Zintava";
                         } else if(((-25.86440<=latitude)&&(latitude<=-25.88166))&&((32.64821<=longitude)&&(longitude<=32.67725))){
-                            portagem="Portagem Costa do Sol";
+                            textPortagem="Portagem Costa do Sol";
                         }else if(((-25.79514<=latitude)&&(latitude<=-25.80411))&&((32.56816<=longitude)&&(longitude<=32.58441))){
-                            portagem="Portagem Kumbeza";
+                            textPortagem="Portagem Kumbeza";
                         }else if(((-25.81472<=latitude)&&(latitude<=-25.82630))&&((32.45449<=longitude)&&(longitude<=32.47372))){
-                            portagem="Portagem Matola Gare";
+                            textPortagem="Portagem Matola Gare";
                         }else{
-                            portagem="Portagem nao Identificada";
-                            openDialog();
+                            textPortagem="Portagem nao Identificada";
+//                            openDialog();
                         }
                         tempAtual2.setText(latitude+" "+longitude);
                         runtimer();
@@ -152,23 +159,32 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }else{
-                    openDialog();
+//                    openDialog();
                     tempAtual2.setText("Localizacao nao detectada.");
                 }
             }
         });
     }
+
+    public void saveCheckIn(){
+        CheckInDAO checkInDAO = new CheckInDAO();
+        Date date = new Date();
+        portagem = new Portagem(1,"Zintava",0,0);
+        CheckIn checkIn = checkInDAO.salvar(new CheckIn(0,date,date,idUsuario,portagem));
+    }
+
     public void openDialog(){
         OpenDialog openDialog = new OpenDialog();
         openDialog.show(getSupportFragmentManager(),"Portagem nao Identificada");
     }
+
     private void runtimer(){
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
                 if(adicionar){
-                    tempAtual.setText(portagem);
+                    tempAtual.setText(textPortagem);
                     adicionar = false;
                 }
                 handler.postDelayed(this,1000);
