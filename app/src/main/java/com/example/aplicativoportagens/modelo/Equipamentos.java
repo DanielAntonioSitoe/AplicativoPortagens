@@ -17,6 +17,9 @@ public class Equipamentos {
         this.portagem = portagem;
     }
 
+    public Equipamentos() {
+    }
+
     public int getId() {
         return id;
     }

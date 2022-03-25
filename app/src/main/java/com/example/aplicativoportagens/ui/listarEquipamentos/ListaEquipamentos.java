@@ -12,11 +12,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.aplicativoportagens.Controle.OcorenciasDAO;
 import com.example.aplicativoportagens.R;
 import com.example.aplicativoportagens.modelo.BuscarEquipamentos;
 import com.example.aplicativoportagens.modelo.Equipamentos;
+import com.example.aplicativoportagens.modelo.Ocorencias;
+import com.example.aplicativoportagens.modelo.Usuario;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ListaEquipamentos extends Fragment {
 
@@ -29,6 +34,11 @@ public class ListaEquipamentos extends Fragment {
     ArrayList<Equipamentos> cameras;
     Button enviarCheckList;
     private Context a;
+    OcorenciasDAO ocorenciasDAO;
+    Equipamentos equipamentos;
+    Date date;
+    Usuario idUsuario;
+    private Ocorencias ocorencia;
 
 
     @Override
@@ -36,13 +46,21 @@ public class ListaEquipamentos extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lista_equipamentos_fragment, container, false);
         this.view = view;
-        a=getContext();
-        Intent intent = getActivity().getIntent();
-        BuscarEquipamentos buscarEquipamentos = (BuscarEquipamentos) intent.getSerializableExtra("listaEquipamentos");
-        cameras = (ArrayList<Equipamentos>) buscarEquipamentos.getListEquipamentos();
-        listView = view.findViewById(R.id.listview);
-        adapter = new ArrayAdapter<Equipamentos>(a,android.R.layout.simple_list_item_multiple_choice,cameras);
-        listView.setAdapter(adapter);
+        try {
+            a = getContext();
+            ocorenciasDAO = new OcorenciasDAO();
+            equipamentos = new Equipamentos();
+            Intent intent = getActivity().getIntent();
+            BuscarEquipamentos buscarEquipamentos = (BuscarEquipamentos) intent.getSerializableExtra("listaEquipamentos");
+            cameras = (ArrayList<Equipamentos>) buscarEquipamentos.getListEquipamentos();
+            listView = view.findViewById(R.id.listview);
+            adapter = new ArrayAdapter<Equipamentos>(a, android.R.layout.simple_list_item_multiple_choice, cameras);
+            listView.setAdapter(adapter);
+            date = new Date();
+            idUsuario = (Usuario) intent.getSerializableExtra("nome");
+        }catch (Exception e){
+
+        }
         return view;
     }
 
@@ -68,13 +86,27 @@ public class ListaEquipamentos extends Fragment {
         enviarCheckList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String itemSelected = "Selecionados: \n";
-                for (int i = 0; i < cameras.size(); i++) {
-                    if(listView.isItemChecked(i)){
-                        itemSelected+= listView.getItemAtPosition(i)+"\n";
+                try {
+                    String itemSelected = "Selecionados: \n";
+                    for (int i = 0; i < cameras.size(); i++) {
+                        equipamentos = (Equipamentos) listView.getItemAtPosition(i);
+                        if (listView.isItemChecked(i)) {
+                            ocorencia = new Ocorencias(0, "checklist"
+                                    , "null", "Activo", "null"
+                                    , "null", date, idUsuario, null);
+                            ocorenciasDAO.salvar(ocorencia);
+
+                        } else {
+                            ocorencia = new Ocorencias(0, "checklist"
+                                    , "null", "Inactivo", "null"
+                                    , "null", date, idUsuario, null);
+                            ocorenciasDAO.salvar(ocorencia);
+                        }
                     }
+                    Snackbar.make(v, "ChecList Enviado", Snackbar.LENGTH_LONG).show();
+                }catch (Exception e){
+
                 }
-                Snackbar.make(v,itemSelected,Snackbar.LENGTH_LONG).show();
             }
         });
     }

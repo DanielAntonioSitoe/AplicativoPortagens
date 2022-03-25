@@ -3,27 +3,30 @@ package com.example.aplicativoportagens.ui.monitorar;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.aplicativoportagens.Controle.EquipamentosDAO;
 import com.example.aplicativoportagens.R;
+import com.example.aplicativoportagens.modelo.BuscarEquipamentos;
 import com.example.aplicativoportagens.ui.listarEquipamentos.ListaEquipamentos;
 
 public class PistasFragment extends Fragment implements View.OnClickListener {
 
     private PistasViewModel mViewModel;
-
-    public static PistasFragment newInstance() {
-        return new PistasFragment();
-    }
+    EquipamentosDAO equipamentosDAO;
+    BuscarEquipamentos buscarEquipamentos;
+    private boolean stop = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -66,6 +69,11 @@ public class PistasFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        equipamentosDAO = new EquipamentosDAO();
+        buscarEquipamentos = new BuscarEquipamentos();
+        buscarEquipamentos.setListEquipamentos(equipamentosDAO.buscarTodos());
+        runtimer();
+        if(stop){
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ListaEquipamentos listar = new ListaEquipamentos();
         switch (v.getId()){
@@ -84,5 +92,29 @@ public class PistasFragment extends Fragment implements View.OnClickListener {
         }
         ft.addToBackStack(null);
         ft.commit();
+        }
+    }
+
+
+    private Boolean runtimer(){
+        final Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if(buscarEquipamentos.getListEquipamentos()!=null){
+                    if(!stop) {
+                        stop=true;
+                        Intent intent = getActivity().getIntent();
+                        intent.putExtra("listaEquipamentos", buscarEquipamentos);
+                    }
+                }else {
+                    stop = false;
+                }
+                handler.postDelayed(this,1000);
+
+            }
+        });
+
+        return stop;
     }
 }
