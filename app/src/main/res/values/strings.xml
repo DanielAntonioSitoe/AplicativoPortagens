@@ -14,6 +14,6 @@
     <string name="menu_solicitacoes">Solicitacoes</string>
     <string name="menu_reportar">Reportar Problema</string>
     <string name="title_activity_teste">teste</string>
-    <string name="logout">LogOut</string>
-    <string name="title_activity_logout">Login</string>
+    <string name="logout">Sair</string>
+    <string name="title_activity_logout">Aplicativo Portagens</string>
 </resources>

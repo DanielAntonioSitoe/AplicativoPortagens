@@ -40,7 +40,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
-        android:text="Portagem nao Identificada"
+        android:text=""
         android:textColor="@color/colorPrimary"
         android:textSize="23sp"
         android:textStyle="bold"

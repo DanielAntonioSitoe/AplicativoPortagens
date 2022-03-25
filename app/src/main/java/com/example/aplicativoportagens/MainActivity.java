@@ -123,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
         }else{
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
         }
+
+        if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED){
+            getLocation();
+        }else{
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},44);
+        }
     }
 
 
@@ -160,7 +166,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }else{
 //                    openDialog();
-                    tempAtual2.setText("Localizacao nao detectada.");
+                    getLocation();
+                    try {
+                        tempAtual2.setText("Localizacao nao detectada.");
+                    }catch (Exception e){
+
+                    }
                 }
             }
         });

@@ -7,13 +7,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".logout"
     tools:showIn="@layout/activity_logout">
+
     <LinearLayout
         android:layout_width="248dp"
         android:layout_height="428dp"
+        android:layout_marginTop="112dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,17 +23,18 @@
             android:id="@+id/textViewError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_red_dark"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textColor="@android:color/holo_red_dark" />
+
         <TextView
             android:id="@+id/usernameLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:text="Email"
             android:textColor="@android:color/black"
-            android:text="Email" />
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/usuario"
@@ -43,12 +46,12 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:layout_marginTop="30dp"
+            android:text=" Senha"
             android:textColor="@android:color/black"
-            android:text=" Senha" />
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/senha"
@@ -60,11 +63,11 @@
         <Button
             android:id="@+id/login"
             android:layout_width="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_button"
-            android:textSize="20dp"
-            android:layout_height="wrap_content"
-            android:text="Entrar" />
+            android:text="Entrar"
+            android:textSize="20dp" />
 
     </LinearLayout>
 

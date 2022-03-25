@@ -1,13 +1,6 @@
 package com.example.aplicativoportagens.Controle;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.example.aplicativoportagens.MainActivity;
-import com.example.aplicativoportagens.modelo.BuscarEquipamentos;
 import com.example.aplicativoportagens.modelo.Equipamentos;
-import com.example.aplicativoportagens.modelo.Ocorencias;
-import com.google.android.material.snackbar.Snackbar;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -84,38 +77,14 @@ public class EquipamentosDAO {
                 Log.e(TAG,"onResponse: estado"+list.get(i).getEstado());
                     bairro.add(list.get(i));
                 }
-//                Equipamentos equipamentos = new Equipamentos(response.body().getId(),response.body().getDescricao(),
-//                        response.body().getTipo(),response.body().getEstado(),
-//                        response.body().getLocalizacao(),response.body().getPortagem());
-//                bairro.add(equipamentos);
                 Log.e(TAG,"onResponse: "+response.code());
-//                Log.e(TAG,"onResponse: descricao"+response.body().getDescricao());
-//                Log.e(TAG,"onResponse: estado"+response.body().getEstado());
-//                Log.e(TAG,"onResponse: data"+response.body().getData());
-//                Log.e(TAG,"onResponse: user_id"+response.body().getUsuario().getId());
             }
-
             @Override
             public void onFailure(Call<List<Equipamentos>> call, Throwable t) {
                 Log.e(TAG, "onFailure: "+t.getMessage());
             }
         });
-
-
-
-//        try {
-//            Vector<Equipamentos> lst = new Vector<Equipamentos>();
-//            FileInputStream arquivo = new FileInputStream("equipamentos.arq");
-//            ObjectInputStream objecto = new ObjectInputStream(arquivo);
-//            lst = (Vector<Equipamentos>) objecto.readObject();
-//            bairro = lst;
-//        } catch (Exception erro) {
-//            Snackbar.make(null, "Falha", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show();
-//            erro.printStackTrace();
-//        }
         return bairro;
-
     }
 
     public Equipamentos buscarUm(int codigo) {
