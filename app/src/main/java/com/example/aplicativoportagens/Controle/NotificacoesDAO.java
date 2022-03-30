@@ -1,13 +1,23 @@
 package com.example.aplicativoportagens.Controle;
 
+import android.util.Log;
+
+import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.Notificacoes;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class NotificacoesDAO {
 
@@ -56,16 +66,31 @@ public class NotificacoesDAO {
 
     }
 
-    public List<Notificacoes> buscarTodos() {
-        List<Notificacoes> bairro = null;
+    public List<Notificacoes> buscarTodos(int id_user) {
+        List<Notificacoes> bairro = new ArrayList<>();
         try {
-            Vector<Notificacoes> lst = new Vector<Notificacoes>();
-            FileInputStream arquivo = new FileInputStream("notificacoes.arq");
-            ObjectInputStream objecto = new ObjectInputStream(arquivo);
-            lst = (Vector<Notificacoes>) objecto.readObject();
-            bairro = lst;
-        } catch (Exception erro) {
-//            JOptionPane.showMessageDialog(null, " Erro de Leitura: " + erro.getMessage());
+
+            ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+            Call<List<Notificacoes>> call = apiInterface.getBuscarNotificacoes(id_user);
+            call.enqueue(new Callback<List<Notificacoes>>() {
+                @Override
+                public void onResponse(Call<List<Notificacoes>> call, Response<List<Notificacoes>> response) {
+                    List<Notificacoes> list = response.body();
+                    for (int i = 0; i < list.size(); i++) {
+                        Log.e(TAG, "onResponse: descricao" + list.get(i).getDescricao());
+                        Log.e(TAG, "onResponse: estado" + list.get(i).getEstado());
+                        bairro.add(list.get(i));
+                    }
+                    Log.e(TAG, "onResponse: " + response.code());
+                }
+
+                @Override
+                public void onFailure(Call<List<Notificacoes>> call, Throwable t) {
+                    Log.e(TAG, "onFailure: " + t.getMessage());
+                }
+            });
+        }catch (Exception e){
+            Log.e(TAG,"ERROR:"+e.getMessage());
         }
         return bairro;
 

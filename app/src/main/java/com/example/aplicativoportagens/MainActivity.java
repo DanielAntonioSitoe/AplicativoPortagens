@@ -1,22 +1,30 @@
 package com.example.aplicativoportagens;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.aplicativoportagens.Controle.CheckInDAO;
+import com.example.aplicativoportagens.Controle.NotificacoesDAO;
 import com.example.aplicativoportagens.modelo.CheckIn;
+import com.example.aplicativoportagens.modelo.Notificacoes;
 import com.example.aplicativoportagens.modelo.Portagem;
 import com.example.aplicativoportagens.modelo.Usuario;
 import com.example.aplicativoportagens.ui.OpenDialog;
@@ -49,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
     private TextView tempAtual2;
     Usuario idUsuario;
     Portagem portagem;
+    NotificacoesDAO notificacoesDAO;
+    Intent intent;
+    PendingIntent pendingIntent;
+    final Handler handler = new Handler();
+    List<Notificacoes> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +86,16 @@ public class MainActivity extends AppCompatActivity {
         idUsuario = (Usuario) intent.getSerializableExtra("nome");
         atualizarNome();
         client = LocationServices.getFusedLocationProviderClient(this);
+
+
+
+
+        notificacoesDAO = new NotificacoesDAO();
+        intent = new Intent(this,MainActivity.class);
+        pendingIntent = PendingIntent.getActivity(this,100,intent,PendingIntent.FLAG_CANCEL_CURRENT);
+        list = notificacoesDAO.buscarTodos(idUsuario.getId());
+
+
     }
 
     public Usuario getIdUsuario() {
@@ -91,13 +114,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public  void  atualizarNome(){
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        View heaerView = navigationView.getHeaderView(0);
-        TextView userName = heaerView.findViewById(R.id.userName);
-        TextView userPortagem = heaerView.findViewById(R.id.userPortagem);
-        userPortagem.setText(textPortagem);
-        userName.setText(idUsuario.getNome());
-        saveCheckIn();
+        try {
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            View heaerView = navigationView.getHeaderView(0);
+            TextView userName = heaerView.findViewById(R.id.userName);
+            TextView userPortagem = heaerView.findViewById(R.id.userPortagem);
+            userPortagem.setText(textPortagem);
+            userName.setText(idUsuario.getNome());
+            saveCheckIn();
+        }catch (Exception e){
+
+        }
     }
 
     @Override
@@ -160,12 +187,13 @@ public class MainActivity extends AppCompatActivity {
 //                            openDialog();
                         }
                         tempAtual2.setText(latitude+" "+longitude);
-                        runtimer();
+//                        runtimer();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }else{
 //                    openDialog();
+                    notificar();
                     getLocation();
                     try {
                         tempAtual2.setText("Localizacao nao detectada.");
@@ -190,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void runtimer(){
-        final Handler handler = new Handler();
+//        final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -202,6 +230,47 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void notificar(){
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if(list!=null){
+                    for (int i = 0; i < list.size(); i++) {
+                        if(list.get(i).getEstado().equalsIgnoreCase("visto")){
+
+                        }else {
+                            if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O) {
+                                NotificationChannel channel = new NotificationChannel("APP Portagem", "APP Portagem", NotificationManager.IMPORTANCE_DEFAULT);
+                                NotificationManager manager = getSystemService(NotificationManager.class);
+                                manager.createNotificationChannel(channel);
+                            }
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this,"APP Portagem");
+                            builder.setContentTitle(list.get(i).getTema());
+                            builder.setContentText(list.get(i).getDescricao());
+                            builder.setContentIntent(pendingIntent);
+                            builder.setSmallIcon(R.drawable.ic_launcher_background);
+                            builder.setAutoCancel(true);
+                            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainActivity.this);
+                            managerCompat.notify(1,builder.build());
+                        }
+                    }
+
+                    list=null;
+                }
+                handler.postDelayed(this,100000);
+
+            }
+        });
+
+
+
+
+
+
+
 
     }
 }

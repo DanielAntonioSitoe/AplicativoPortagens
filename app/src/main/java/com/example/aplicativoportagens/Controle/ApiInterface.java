@@ -3,6 +3,7 @@ package com.example.aplicativoportagens.Controle;
 import com.example.aplicativoportagens.modelo.CheckIn;
 import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.LogedUser;
+import com.example.aplicativoportagens.modelo.Notificacoes;
 import com.example.aplicativoportagens.modelo.Ocorencias;
 import com.example.aplicativoportagens.modelo.Solicitacoes;
 import com.example.aplicativoportagens.modelo.Usuario;
@@ -47,5 +48,9 @@ public interface ApiInterface {
 
     @GET("api/equipamentos")
     Call<List<Equipamentos>> getBuscarEquipamentos();
+
+    @FormUrlEncoded
+    @POST("api/notificacoes_user")
+    Call<List<Notificacoes>> getBuscarNotificacoes(@Field("user_id") int user_id);
 
 }

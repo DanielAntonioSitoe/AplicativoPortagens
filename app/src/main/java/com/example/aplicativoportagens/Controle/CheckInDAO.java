@@ -23,7 +23,7 @@ public class CheckInDAO {
     public CheckIn salvar(CheckIn v) {
 
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<CheckIn> call = apiInterface.getGravarCheckIn(v.getUsuario().getId(),v.getPortagem().getId(),"2020-01-03","2020-01-03");
+        Call<CheckIn> call = apiInterface.getGravarCheckIn(v.getUsuario().getId(),v.getPortagem().getId(),"2022-03-29","2022-03-29");
         call.enqueue(new Callback<CheckIn>() {
             @Override
             public void onResponse(Call<CheckIn> call, Response<CheckIn> response) {

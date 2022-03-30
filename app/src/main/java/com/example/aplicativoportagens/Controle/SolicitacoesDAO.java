@@ -41,7 +41,7 @@ public class SolicitacoesDAO {
 //        }
 
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<Solicitacoes> call = apiInterface.getGravarSolicitacoes(v.getDescricao(),v.getEstado(),"2020-01-03",v.getUsuario().getId()+"");
+        Call<Solicitacoes> call = apiInterface.getGravarSolicitacoes(v.getDescricao(),v.getEstado(),"2022-03-29",v.getUsuario().getId()+"");
         call.enqueue(new Callback<Solicitacoes>() {
             @Override
             public void onResponse(Call<Solicitacoes> call, Response<Solicitacoes> response) {

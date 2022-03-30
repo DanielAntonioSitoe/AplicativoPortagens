@@ -24,7 +24,7 @@ public class OcorenciasDAO {
 
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<Ocorencias> call = apiInterface.getGravarOcorencias(v.getDescricao(),v.getTipo(),v.getEstadoActual(),
-                "2020-01-03",v.getObservacoes(),v.getMetodoResolucao(),
+                "2022-03-29",v.getObservacoes(),v.getMetodoResolucao(),
                 v.getUsuario().getId()+"","1");
         call.enqueue(new Callback<Ocorencias>() {
             @Override
