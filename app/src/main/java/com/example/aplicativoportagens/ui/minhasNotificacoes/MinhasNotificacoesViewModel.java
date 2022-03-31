@@ -6,14 +6,5 @@ import androidx.lifecycle.ViewModel;
 
 public class MinhasNotificacoesViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
 
-    public MinhasNotificacoesViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Minhas Notificacoes fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
-    }
 }

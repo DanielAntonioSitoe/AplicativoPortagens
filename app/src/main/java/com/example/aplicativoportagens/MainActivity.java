@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     PendingIntent pendingIntent;
     final Handler handler = new Handler();
     List<Notificacoes> list;
+    private boolean notificou = false;
+    NotificationCompat.Builder builder;
+    NotificationManagerCompat managerCompat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +95,16 @@ public class MainActivity extends AppCompatActivity {
 
         notificacoesDAO = new NotificacoesDAO();
         intent = new Intent(this,MainActivity.class);
+        intent.putExtra("nome",idUsuario);
         pendingIntent = PendingIntent.getActivity(this,100,intent,PendingIntent.FLAG_CANCEL_CURRENT);
         list = notificacoesDAO.buscarTodos(idUsuario.getId());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("APP Portagem", "APP Portagem", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        builder = new NotificationCompat.Builder(MainActivity.this, "APP Portagem");
+        managerCompat = NotificationManagerCompat.from(MainActivity.this);
 
 
     }
@@ -237,29 +248,27 @@ public class MainActivity extends AppCompatActivity {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if(list!=null){
+                if (!notificou) {
+//                if (list != null) {
                     for (int i = 0; i < list.size(); i++) {
-                        if(list.get(i).getEstado().equalsIgnoreCase("visto")){
+                        if (list.get(i).getEstado().equalsIgnoreCase("visto")) {
 
-                        }else {
-                            if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O) {
-                                NotificationChannel channel = new NotificationChannel("APP Portagem", "APP Portagem", NotificationManager.IMPORTANCE_DEFAULT);
-                                NotificationManager manager = getSystemService(NotificationManager.class);
-                                manager.createNotificationChannel(channel);
-                            }
-                            NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this,"APP Portagem");
+                        } else {
                             builder.setContentTitle(list.get(i).getTema());
                             builder.setContentText(list.get(i).getDescricao());
                             builder.setContentIntent(pendingIntent);
                             builder.setSmallIcon(R.drawable.ic_launcher_background);
                             builder.setAutoCancel(true);
-                            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainActivity.this);
-                            managerCompat.notify(1,builder.build());
+                            managerCompat.notify(1, builder.build());
+                            if(i==list.size()-1) {
+                                notificou = true;
+                            }
                         }
                     }
 
-                    list=null;
-                }
+//                    list = null;
+//                }
+            }
                 handler.postDelayed(this,100000);
 
             }
