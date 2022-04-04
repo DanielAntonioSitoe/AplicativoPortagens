@@ -40,6 +40,20 @@
             android:textColor="#004570"
             android:textSize="12sp"></TextView>
 
+        <TextView
+            android:id="@+id/estadoNotificacao"
+            android:layout_width="50dp"
+            android:layout_height="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:background="@drawable/custom_button2"
+            android:text="Nova"
+            android:textColor="@android:color/white"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+
 
     </RelativeLayout>
 

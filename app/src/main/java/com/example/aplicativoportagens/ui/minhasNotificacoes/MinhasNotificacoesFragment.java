@@ -1,7 +1,6 @@
 package com.example.aplicativoportagens.ui.minhasNotificacoes;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -47,9 +46,10 @@ public class MinhasNotificacoesFragment extends Fragment {
         notificacoes = new ArrayList<>();
         stop = false;
         usuario = (Usuario) intent.getSerializableExtra("nome");
-        runtimer();
         listView = root.findViewById(R.id.listviewNotificacoes);
         listView.setAdapter(customAdapter);
+        notificacoes = notificacoesDAO.buscarTodos(usuario.getId());
+        atualizarTabela();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,26 +88,35 @@ public class MinhasNotificacoesFragment extends Fragment {
         public View getView(int i, View convertView, ViewGroup parent) {
             View view1 = getLayoutInflater().inflate(R.layout.equipamento_item_fragment,null);
             RelativeLayout relativeLayout = view1.findViewById(R.id.listviewdata);
+            TextView btnVista = view1.findViewById(R.id.estadoNotificacao);
+            btnVista.setVisibility(View.INVISIBLE);
             if(!notificacoes.get(i).getEstado().equalsIgnoreCase("visto")) {
-                relativeLayout.setBackgroundColor(Color.parseColor("#A5D6A7"));
+                btnVista.setVisibility(View.VISIBLE);
             }
             TextView tema = view1.findViewById(R.id.notificacaoTema);
             TextView descricao = view1.findViewById(R.id.notificacaoDescricao);
-            tema.setText(notificacoes.get(i).getTema());
-            descricao.setText(notificacoes.get(i).getDescricao());
+
+            try {
+                tema.setText(notificacoes.get(i).getTema().substring(0, 40) + "...");
+            }catch (Exception e){
+                tema.setText(notificacoes.get(i).getTema());
+            }
+            try {
+                descricao.setText(notificacoes.get(i).getDescricao().substring(0, 50) + "...");
+            }catch (Exception e){
+                descricao.setText(notificacoes.get(i).getDescricao());
+            }
             return view1;
         }
     }
 
-    private void runtimer(){
+    private void atualizarTabela(){
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
                 if(!stop) {
-                    if (notificacoes.size() == 0) {
-                        notificacoes = notificacoesDAO.buscarTodos(usuario.getId());
-                    } else {
+                    if (notificacoes.size() != 0) {
                         customAdapter.notifyDataSetChanged();
                         stop =true;
                     }
