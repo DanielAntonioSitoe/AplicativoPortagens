@@ -93,13 +93,13 @@ public class ListaEquipamentos extends Fragment {
                         if (listView.isItemChecked(i)) {
                             ocorencia = new Ocorencias(0, "checklist"
                                     , "null", "Activo", "null"
-                                    , "null", date, idUsuario, null);
+                                    , "null", date, idUsuario, equipamentos);
                             ocorenciasDAO.salvar(ocorencia);
 
                         } else {
                             ocorencia = new Ocorencias(0, "checklist"
                                     , "null", "Inactivo", "null"
-                                    , "null", date, idUsuario, null);
+                                    , "null", date, idUsuario, equipamentos);
                             ocorenciasDAO.salvar(ocorencia);
                         }
                     }

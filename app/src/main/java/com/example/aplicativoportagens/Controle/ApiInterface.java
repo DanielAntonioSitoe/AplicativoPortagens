@@ -5,7 +5,9 @@ import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.LogedUser;
 import com.example.aplicativoportagens.modelo.Notificacoes;
 import com.example.aplicativoportagens.modelo.Ocorencias;
+import com.example.aplicativoportagens.modelo.Portagem;
 import com.example.aplicativoportagens.modelo.Solicitacoes;
+import com.example.aplicativoportagens.modelo.Turnos;
 import com.example.aplicativoportagens.modelo.Usuario;
 
 import java.util.List;
@@ -49,8 +51,15 @@ public interface ApiInterface {
     @GET("api/equipamentos")
     Call<List<Equipamentos>> getBuscarEquipamentos();
 
+    @GET("api/portagens")
+    Call<List<Portagem>> getBuscarPortagens();
+
     @FormUrlEncoded
     @POST("api/notificacoes_user")
     Call<List<Notificacoes>> getBuscarNotificacoes(@Field("user_id") int user_id);
+
+    @FormUrlEncoded
+    @POST("api/turno_user")
+    Call<List<Turnos>> getBuscarTurnos(@Field("user_id") int user_id);
 
 }

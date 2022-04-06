@@ -18,6 +18,7 @@ import com.example.aplicativoportagens.Controle.OcorenciasDAO;
 import com.example.aplicativoportagens.Controle.SolicitacoesDAO;
 import com.example.aplicativoportagens.MainActivity;
 import com.example.aplicativoportagens.R;
+import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.Ocorencias;
 import com.example.aplicativoportagens.modelo.Solicitacoes;
 import com.example.aplicativoportagens.modelo.Usuario;
@@ -69,7 +70,7 @@ public class ReportarFragment extends Fragment {
                 String resoluca = resolucao.getText().toString();
                 date = new Date();
 
-                ocorencias  = new Ocorencias(0,"Reporte",descrica,"Pendente",observaca,resoluca,date,idUsuario,null);
+                ocorencias  = new Ocorencias(0,"problema",descrica,"Pendente",observaca,resoluca,date,idUsuario,new Equipamentos(1,"","","","",null));
                 final Boolean salvo = ocorenciasDAO.salvar(ocorencias);
                 if(salvo) {
                     Snackbar.make(v, "Usuario: "+idUsuario.getNome() + " Texto " + descrica+" Estado: "+ocorencias.getEstadoActual(), Snackbar.LENGTH_LONG).show();

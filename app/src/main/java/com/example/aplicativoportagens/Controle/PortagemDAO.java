@@ -1,13 +1,23 @@
 package com.example.aplicativoportagens.Controle;
 
+import android.util.Log;
+
+import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.Portagem;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class PortagemDAO {
 
@@ -57,17 +67,25 @@ public class PortagemDAO {
     }
 
     public List<Portagem> buscarTodos() {
-        List<Portagem> bairro = null;
-        try {
-            Vector<Portagem> lst = new Vector<Portagem>();
-            FileInputStream arquivo = new FileInputStream("portagem.arq");
-            ObjectInputStream objecto = new ObjectInputStream(arquivo);
-            lst = (Vector<Portagem>) objecto.readObject();
-            bairro = lst;
-        } catch (Exception erro) {
-//            JOptionPane.showMessageDialog(null, " Erro de Leitura: " + erro.getMessage());
-            erro.printStackTrace();
-        }
+        List<Portagem> bairro = new ArrayList<>();
+
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<Portagem>> call = apiInterface.getBuscarPortagens();
+        call.enqueue(new Callback<List<Portagem>>() {
+            @Override
+            public void onResponse(Call<List<Portagem>> call, Response<List<Portagem>> response) {
+                List<Portagem> list = response.body();
+                for (int i = 0; i < list.size(); i++) {
+                    Log.e(TAG,"onResponse: Portagem "+list.get(i).getNome());
+                    bairro.add(list.get(i));
+                }
+                Log.e(TAG,"onResponse: "+response.code());
+            }
+            @Override
+            public void onFailure(Call<List<Portagem>> call, Throwable t) {
+                Log.e(TAG, "onFailure: "+t.getMessage());
+            }
+        });
         return bairro;
 
     }
