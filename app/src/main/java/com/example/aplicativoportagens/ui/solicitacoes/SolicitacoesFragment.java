@@ -41,13 +41,6 @@ public class SolicitacoesFragment extends Fragment {
         solicitacoesViewModel =
                 ViewModelProviders.of(this).get(SolicitacoesViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_solicitacoes, container, false);
-//        final TextView textView = root.findViewById(R.id.text_share);
-//        solicitacoesViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
         mainActivity = (MainActivity) getActivity();
         idUsuario = mainActivity.getIdUsuario();
         solicitacoesDAO = new SolicitacoesDAO();
@@ -61,8 +54,9 @@ public class SolicitacoesFragment extends Fragment {
                 date = new Date();
                 solicitacoes  = new Solicitacoes(0,texto,"pendente", date,idUsuario);
                 final Boolean salvo = solicitacoesDAO.salvar(solicitacoes);
+                editText.setText("");
                 if(salvo) {
-                    Snackbar.make(v, "Usuario: "+idUsuario.getNome() + " Texto " + texto+" Estado: "+solicitacoes.getEstado(), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(v, "Solicitacao Enviada! ", Snackbar.LENGTH_LONG).show();
                 }
             }
         });

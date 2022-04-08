@@ -29,7 +29,7 @@ public class OcorenciasDAO {
         call.enqueue(new Callback<Ocorencias>() {
             @Override
             public void onResponse(Call<Ocorencias> call, Response<Ocorencias> response) {
-                Log.e(TAG,"onResponse: "+response.code());
+                Log.e(TAG,"onResponse: "+response.message());
             }
 
             @Override

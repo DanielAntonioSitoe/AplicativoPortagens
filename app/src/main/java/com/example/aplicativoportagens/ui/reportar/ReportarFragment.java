@@ -14,10 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.aplicativoportagens.Controle.EquipamentosDAO;
 import com.example.aplicativoportagens.Controle.OcorenciasDAO;
 import com.example.aplicativoportagens.Controle.SolicitacoesDAO;
 import com.example.aplicativoportagens.MainActivity;
 import com.example.aplicativoportagens.R;
+import com.example.aplicativoportagens.modelo.BuscarEquipamentos;
 import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.Ocorencias;
 import com.example.aplicativoportagens.modelo.Solicitacoes;
@@ -25,6 +27,7 @@ import com.example.aplicativoportagens.modelo.Usuario;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Date;
+import java.util.List;
 
 public class ReportarFragment extends Fragment {
 
@@ -38,20 +41,15 @@ public class ReportarFragment extends Fragment {
     EditText resolucao;
     private Date date;
     Ocorencias ocorencias;
+    private EquipamentosDAO equipamentosDAO;
+    private List<Equipamentos> equipamentosList;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         reportarViewModel =
                 ViewModelProviders.of(this).get(ReportarViewModel.class);
         View root = inflater.inflate(R.layout.fragment_reportar, container, false);
-//        final TextView textView = root.findViewById(R.id.text_reportar);
-//        reportarViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-
 
         mainActivity = (MainActivity) getActivity();
         idUsuario = mainActivity.getIdUsuario();
@@ -61,6 +59,8 @@ public class ReportarFragment extends Fragment {
         descricao = root.findViewById(R.id.textProblemaDescricao);
         observacao = root.findViewById(R.id.textProblemaObservacao);
         resolucao = root.findViewById(R.id.textProblemaResolucao);
+        equipamentosDAO = new EquipamentosDAO();
+        equipamentosList = equipamentosDAO.buscarTodos();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +69,15 @@ public class ReportarFragment extends Fragment {
                 String observaca = observacao.getText().toString();
                 String resoluca = resolucao.getText().toString();
                 date = new Date();
+                Equipamentos equipamentos = equipamentosList.get(0);
 
-                ocorencias  = new Ocorencias(0,"problema",descrica,"Pendente",observaca,resoluca,date,idUsuario,new Equipamentos(1,"","","","",null));
+                ocorencias  = new Ocorencias(0,"problema",descrica,"Pendente",observaca,resoluca,date,idUsuario,equipamentos);
                 final Boolean salvo = ocorenciasDAO.salvar(ocorencias);
+                descricao.setText("");
+                observacao.setText("");
+                resolucao.setText("");
                 if(salvo) {
-                    Snackbar.make(v, "Usuario: "+idUsuario.getNome() + " Texto " + descrica+" Estado: "+ocorencias.getEstadoActual(), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(v, "Problema Enviado ", Snackbar.LENGTH_LONG).show();
                 }
             }
         });
