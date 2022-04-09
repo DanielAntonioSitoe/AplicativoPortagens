@@ -31,7 +31,6 @@ import java.util.List;
 
 public class ReportarFragment extends Fragment {
 
-    private ReportarViewModel reportarViewModel;
     private MainActivity mainActivity;
     private Usuario idUsuario;
     OcorenciasDAO ocorenciasDAO;
@@ -47,8 +46,6 @@ public class ReportarFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        reportarViewModel =
-                ViewModelProviders.of(this).get(ReportarViewModel.class);
         View root = inflater.inflate(R.layout.fragment_reportar, container, false);
 
         mainActivity = (MainActivity) getActivity();

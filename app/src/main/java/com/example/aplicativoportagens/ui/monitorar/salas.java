@@ -56,7 +56,7 @@ public class salas extends Fragment implements View.OnClickListener {
             ListaEquipamentos listar = new ListaEquipamentos();
             switch (v.getId()) {
                 case R.id.salaControle:
-                    listar.setTela("Sala de Controle");
+                    listar.setTela("Sala de Monitoramento");
                     ft.replace(R.id.nav_host_fragment, listar);
                     break;
                 case R.id.salaServidor:

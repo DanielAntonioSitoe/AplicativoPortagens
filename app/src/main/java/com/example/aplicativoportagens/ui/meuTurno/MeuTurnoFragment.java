@@ -42,12 +42,9 @@ public class MeuTurnoFragment extends Fragment {
     Portagem portagem;
     List<Portagem> portagens;
 
-    private MeuTurnoViewModel meuTurnoViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        meuTurnoViewModel =
-                ViewModelProviders.of(this).get(MeuTurnoViewModel.class);
         root = inflater.inflate(R.layout.fragment_meuturno, container, false);
         return root;
     }

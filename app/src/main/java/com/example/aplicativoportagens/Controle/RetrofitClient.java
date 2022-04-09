@@ -7,7 +7,7 @@ public class RetrofitClient {
     public  static Retrofit retrofit;
     public static Retrofit getRetrofitInstance(){
         if(retrofit==null){
-            retrofit = new Retrofit.Builder().baseUrl("http://portagem-api.herokuapp.com/").addConverterFactory(GsonConverterFactory.create()).build();
+            retrofit = new Retrofit.Builder().baseUrl("http://portagem.herokuapp.com/").addConverterFactory(GsonConverterFactory.create()).build();
         }
         return retrofit;
     }

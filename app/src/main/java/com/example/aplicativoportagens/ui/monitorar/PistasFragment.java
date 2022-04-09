@@ -23,7 +23,6 @@ import com.example.aplicativoportagens.ui.listarEquipamentos.ListaEquipamentos;
 
 public class PistasFragment extends Fragment implements View.OnClickListener {
 
-    private PistasViewModel mViewModel;
     EquipamentosDAO equipamentosDAO;
     BuscarEquipamentos buscarEquipamentos;
     private boolean stop = false;
@@ -63,7 +62,6 @@ public class PistasFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(PistasViewModel.class);
         // TODO: Use the ViewModel
     }
 
@@ -77,18 +75,18 @@ public class PistasFragment extends Fragment implements View.OnClickListener {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ListaEquipamentos listar = new ListaEquipamentos();
         switch (v.getId()){
-            case R.id.pista1:listar.setTela("pista1");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista2:listar.setTela("pista2");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista3:listar.setTela("pista3");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista4:listar.setTela("pista4");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista5:listar.setTela("pista5");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista6:listar.setTela("pista6");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista7:listar.setTela("pista7");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista8:listar.setTela("pista8");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista9:listar.setTela("pista9");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista10:listar.setTela("pista10");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista11:listar.setTela("pista11");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.pista12:listar.setTela("pista12");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista1:listar.setTela("pista 1");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista2:listar.setTela("pista 2");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista3:listar.setTela("pista 3");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista4:listar.setTela("pista 4");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista5:listar.setTela("pista 5");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista6:listar.setTela("pista 6");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista7:listar.setTela("pista 7");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista8:listar.setTela("pista 8");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista9:listar.setTela("pista 9");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista10:listar.setTela("pista 10");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista11:listar.setTela("pista 11");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.pista12:listar.setTela("pista 12");ft.replace(R.id.nav_host_fragment,listar);break;
         }
         ft.addToBackStack(null);
         ft.commit();

@@ -18,7 +18,6 @@ import com.example.aplicativoportagens.ui.listarEquipamentos.ListaEquipamentos;
 
 public class CabinesFragment extends Fragment implements View.OnClickListener {
 
-    private CabinesViewModel mViewModel;
     EquipamentosDAO equipamentosDAO;
     BuscarEquipamentos buscarEquipamentos;
     private boolean stop = false;
@@ -63,7 +62,6 @@ public class CabinesFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(CabinesViewModel.class);
         // TODO: Use the ViewModel
     }
 
@@ -77,18 +75,18 @@ public class CabinesFragment extends Fragment implements View.OnClickListener {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ListaEquipamentos listar = new ListaEquipamentos();
         switch (v.getId()){
-            case R.id.cabine1:listar.setTela("Cabine1");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine2:listar.setTela("Cabine2");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine3:listar.setTela("Cabine3");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine4:listar.setTela("Cabine4");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine5:listar.setTela("Cabine5");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine6:listar.setTela("Cabine6");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine7:listar.setTela("Cabine7");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine8:listar.setTela("Cabine8");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine9:listar.setTela("Cabine9");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine10:listar.setTela("Cabine10");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine11:listar.setTela("Cabine11");ft.replace(R.id.nav_host_fragment,listar);break;
-            case R.id.cabine12:listar.setTela("Cabine12");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine1:listar.setTela("Cabine 1");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine2:listar.setTela("Cabine 2");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine3:listar.setTela("Cabine 3");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine4:listar.setTela("Cabine 4");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine5:listar.setTela("Cabine 5");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine6:listar.setTela("Cabine 6");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine7:listar.setTela("Cabine 7");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine8:listar.setTela("Cabine 8");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine9:listar.setTela("Cabine 9");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine10:listar.setTela("Cabine 10");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine11:listar.setTela("Cabine 11");ft.replace(R.id.nav_host_fragment,listar);break;
+            case R.id.cabine12:listar.setTela("Cabine 12");ft.replace(R.id.nav_host_fragment,listar);break;
         }
         ft.addToBackStack(null);
         ft.commit();

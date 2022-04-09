@@ -16,8 +16,6 @@ import com.example.aplicativoportagens.R;
 
 public class EquipamentoItem extends Fragment {
 
-    private EquipamentoItemViewModel mViewModel;
-
     public static EquipamentoItem newInstance() {
         return new EquipamentoItem();
     }
@@ -31,7 +29,6 @@ public class EquipamentoItem extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(EquipamentoItemViewModel.class);
         // TODO: Use the ViewModel
     }
 

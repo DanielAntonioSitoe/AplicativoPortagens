@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ListaEquipamentos extends Fragment {
-
-    private ListaEquipamentosViewModel mViewModel;
     ListView listView;
     View view;
     String tela;
@@ -75,7 +73,6 @@ public class ListaEquipamentos extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ListaEquipamentosViewModel.class);
         // TODO: Use the ViewModel
     }
 

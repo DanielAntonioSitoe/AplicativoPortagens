@@ -17,15 +17,12 @@ import com.example.aplicativoportagens.ui.listarEquipamentos.ListaEquipamentos;
 
 public class MonitorarFragment extends Fragment {
 
-    private MonitorarViewModel monitorarViewModel;
     EquipamentosDAO equipamentosDAO;
     BuscarEquipamentos buscarEquipamentos;
     private boolean stop = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        monitorarViewModel =
-                ViewModelProviders.of(this).get(MonitorarViewModel.class);
         View view = inflater.inflate(R.layout.fragment_monitorar, container, false);
         Button btnFragment = view.findViewById(R.id.salas);
         btnFragment.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +64,7 @@ public class MonitorarFragment extends Fragment {
                 runtimer();
                 if(stop) {
                     ListaEquipamentos listar = new ListaEquipamentos();
-                    listar.setTela("Outros");
+                    listar.setTela("Outras");
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.nav_host_fragment, listar);
                     ft.addToBackStack(null);
