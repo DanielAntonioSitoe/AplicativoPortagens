@@ -70,6 +70,10 @@ public class Equipamentos {
 
     @Override
     public String toString() {
-        return descricao;
+        try{
+            return tipo + "\n" + descricao.substring(0,35) + "...";
+        }catch (Exception e) {
+            return tipo + "\n" + descricao;
+        }
     }
 }

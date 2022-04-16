@@ -1,12 +1,10 @@
 package com.example.aplicativoportagens.ui.listarEquipamentos;
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,18 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
 import com.example.aplicativoportagens.Controle.EquipamentosDAO;
 import com.example.aplicativoportagens.Controle.OcorenciasDAO;
 import com.example.aplicativoportagens.R;
-import com.example.aplicativoportagens.modelo.BuscarEquipamentos;
 import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.Ocorencias;
 import com.example.aplicativoportagens.modelo.Usuario;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -59,7 +54,7 @@ public class ListaEquipamentos extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        stop = false;
         try {
         a = getContext();
         ocorenciasDAO = new OcorenciasDAO();
@@ -77,10 +72,6 @@ public class ListaEquipamentos extends Fragment {
             Log.e(TAG,e.getMessage());
 
         }
-    }
-
-    public String getTela() {
-        return tela;
     }
 
     public void setTela(String tela) {
@@ -101,7 +92,6 @@ public class ListaEquipamentos extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    String itemSelected = "Selecionados: \n";
                     for (int i = 0; i < cameras.size(); i++) {
                         equipamentos = (Equipamentos) listView.getItemAtPosition(i);
                         if (listView.isItemChecked(i)) {
