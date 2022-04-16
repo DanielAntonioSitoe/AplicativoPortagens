@@ -23,9 +23,6 @@ import com.example.aplicativoportagens.ui.listarEquipamentos.ListaEquipamentos;
 
 public class PistasFragment extends Fragment implements View.OnClickListener {
 
-    EquipamentosDAO equipamentosDAO;
-    BuscarEquipamentos buscarEquipamentos;
-    private boolean stop = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -67,11 +64,6 @@ public class PistasFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        equipamentosDAO = new EquipamentosDAO();
-        buscarEquipamentos = new BuscarEquipamentos();
-        buscarEquipamentos.setListEquipamentos(equipamentosDAO.buscarTodos());
-        runtimer();
-        if(stop){
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ListaEquipamentos listar = new ListaEquipamentos();
         switch (v.getId()){
@@ -90,29 +82,7 @@ public class PistasFragment extends Fragment implements View.OnClickListener {
         }
         ft.addToBackStack(null);
         ft.commit();
-        }
     }
 
 
-    private Boolean runtimer(){
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if(buscarEquipamentos.getListEquipamentos()!=null){
-                    if(!stop) {
-                        stop=true;
-                        Intent intent = getActivity().getIntent();
-                        intent.putExtra("listaEquipamentos", buscarEquipamentos);
-                    }
-                }else {
-                    stop = false;
-                }
-                handler.postDelayed(this,1000);
-
-            }
-        });
-
-        return stop;
-    }
 }

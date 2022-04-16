@@ -57,7 +57,7 @@ public class ReportarFragment extends Fragment {
         observacao = root.findViewById(R.id.textProblemaObservacao);
         resolucao = root.findViewById(R.id.textProblemaResolucao);
         equipamentosDAO = new EquipamentosDAO();
-        equipamentosList = equipamentosDAO.buscarTodos();
+        equipamentosList = equipamentosDAO.buscarTodos2();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

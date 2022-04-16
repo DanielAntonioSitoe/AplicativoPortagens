@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,20 @@ import android.widget.Button;
 import com.example.aplicativoportagens.Controle.EquipamentosDAO;
 import com.example.aplicativoportagens.R;
 import com.example.aplicativoportagens.modelo.BuscarEquipamentos;
+import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.ui.listarEquipamentos.ListaEquipamentos;
+
+import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class CabinesFragment extends Fragment implements View.OnClickListener {
 
     EquipamentosDAO equipamentosDAO;
     BuscarEquipamentos buscarEquipamentos;
     private boolean stop = false;
+    FragmentTransaction ft;
+    ListaEquipamentos listar = new ListaEquipamentos();
 
     public static CabinesFragment newInstance() {
         return new CabinesFragment();
@@ -69,11 +77,7 @@ public class CabinesFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         equipamentosDAO = new EquipamentosDAO();
         buscarEquipamentos = new BuscarEquipamentos();
-        buscarEquipamentos.setListEquipamentos(equipamentosDAO.buscarTodos());
-        runtimer();
-        if(stop){
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ListaEquipamentos listar = new ListaEquipamentos();
+        ft = getFragmentManager().beginTransaction();
         switch (v.getId()){
             case R.id.cabine1:listar.setTela("Cabine 1");ft.replace(R.id.nav_host_fragment,listar);break;
             case R.id.cabine2:listar.setTela("Cabine 2");ft.replace(R.id.nav_host_fragment,listar);break;
@@ -90,28 +94,6 @@ public class CabinesFragment extends Fragment implements View.OnClickListener {
         }
         ft.addToBackStack(null);
         ft.commit();
-        }
-    }
-    private Boolean runtimer(){
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if(buscarEquipamentos.getListEquipamentos()!=null){
-                    if(!stop) {
-                        stop=true;
-                        Intent intent = getActivity().getIntent();
-                        intent.putExtra("listaEquipamentos", buscarEquipamentos);
-                    }
-                }else {
-                    stop = false;
-                }
-                handler.postDelayed(this,1000);
-
-            }
-        });
-
-        return stop;
     }
 
 }

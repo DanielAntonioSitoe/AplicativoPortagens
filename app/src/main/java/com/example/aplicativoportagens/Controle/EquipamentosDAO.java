@@ -63,7 +63,30 @@ public class EquipamentosDAO {
 
     }
 
-    public List<Equipamentos> buscarTodos() {
+    public List<Equipamentos> buscarTodos(String cabine, int portagem_id) {
+        List<Equipamentos> bairro = new ArrayList<>();
+
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<Equipamentos>> call = apiInterface.getBuscarEquipamentos2(cabine,portagem_id);
+        call.enqueue(new Callback<List<Equipamentos>>() {
+            @Override
+            public void onResponse(Call<List<Equipamentos>> call, Response<List<Equipamentos>> response) {
+                List<Equipamentos> list = response.body();
+                for (int i = 0; i < list.size(); i++) {
+                    Log.e(TAG,"onResponse: descricao"+list.get(i).getDescricao());
+                Log.e(TAG,"onResponse: estado"+list.get(i).getEstado());
+                    bairro.add(list.get(i));
+                }
+                Log.e(TAG,"onResponse: "+response.code());
+            }
+            @Override
+            public void onFailure(Call<List<Equipamentos>> call, Throwable t) {
+                Log.e(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+        return bairro;
+    }
+    public List<Equipamentos> buscarTodos2() {
         List<Equipamentos> bairro = new ArrayList<>();
 
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
@@ -74,7 +97,7 @@ public class EquipamentosDAO {
                 List<Equipamentos> list = response.body();
                 for (int i = 0; i < list.size(); i++) {
                     Log.e(TAG,"onResponse: descricao"+list.get(i).getDescricao());
-                Log.e(TAG,"onResponse: estado"+list.get(i).getEstado());
+                    Log.e(TAG,"onResponse: estado"+list.get(i).getEstado());
                     bairro.add(list.get(i));
                 }
                 Log.e(TAG,"onResponse: "+response.code());

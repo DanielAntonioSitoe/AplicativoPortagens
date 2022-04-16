@@ -51,6 +51,11 @@ public interface ApiInterface {
     @GET("api/equipamentos")
     Call<List<Equipamentos>> getBuscarEquipamentos();
 
+    @FormUrlEncoded
+    @POST("api/localizacao_equipamento")
+    Call<List<Equipamentos>> getBuscarEquipamentos2(@Field("cabine") String cabine,
+                                                    @Field("portagem_id") int portagem_id);
+
     @GET("api/portagens")
     Call<List<Portagem>> getBuscarPortagens();
 

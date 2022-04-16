@@ -17,10 +17,6 @@ import com.example.aplicativoportagens.ui.listarEquipamentos.ListaEquipamentos;
 
 public class MonitorarFragment extends Fragment {
 
-    EquipamentosDAO equipamentosDAO;
-    BuscarEquipamentos buscarEquipamentos;
-    private boolean stop = false;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_monitorar, container, false);
@@ -58,47 +54,15 @@ public class MonitorarFragment extends Fragment {
         btnFragment4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                equipamentosDAO = new EquipamentosDAO();
-                buscarEquipamentos = new BuscarEquipamentos();
-                buscarEquipamentos.setListEquipamentos(equipamentosDAO.buscarTodos());
-                runtimer();
-                if(stop) {
                     ListaEquipamentos listar = new ListaEquipamentos();
                     listar.setTela("Outras");
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.nav_host_fragment, listar);
                     ft.addToBackStack(null);
                     ft.commit();
-                }
             }
         });
-
-
-
-
         return view;
-    }
-
-    private Boolean runtimer(){
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if(buscarEquipamentos.getListEquipamentos()!=null){
-                    if(!stop) {
-                        stop=true;
-                        Intent intent = getActivity().getIntent();
-                        intent.putExtra("listaEquipamentos", buscarEquipamentos);
-                    }
-                }else {
-                    stop = false;
-                }
-                handler.postDelayed(this,1000);
-
-            }
-        });
-
-        return stop;
     }
 
 }
