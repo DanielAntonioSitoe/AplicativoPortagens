@@ -45,7 +45,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("/api/user_log")
-    Call<LogedUser> getLogin(@Field("email") String email,
+    Call<Turnos> getLogin(@Field("email") String email,
                              @Field("password") String password);
 
     @GET("api/equipamentos")

@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".ui.monitorar.CabinesFragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        app:layout_constraintHeight_percent="0.80"
+        app:layout_constraintWidth_percent="0.90"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,8 +19,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <LinearLayout
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="match_parent"
+            app:layout_constraintWidth_percent="0.90"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -86,7 +90,7 @@
                 android:text="Cabine6" />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"

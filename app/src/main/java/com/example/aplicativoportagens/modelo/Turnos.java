@@ -1,20 +1,24 @@
 package com.example.aplicativoportagens.modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Turnos {
+public class Turnos implements Serializable {
     int id;
     String data_inicio;
     String hora_entrada_saida;
-    Usuario usuario;
-    String portagem_id;
+    Usuario user;
+    Portagem portagem;
 
-    public Turnos(int id, String data_inicio, String hora_entrada_saida, Usuario usuario, String portagem) {
+    public Turnos(int id, String data_inicio, String hora_entrada_saida, Usuario usuario, Portagem portagem) {
         this.id = id;
         this.data_inicio = data_inicio;
         this.hora_entrada_saida = hora_entrada_saida;
-        this.usuario = usuario;
-        this.portagem_id = portagem;
+        this.user = usuario;
+        this.portagem = portagem;
+    }
+
+    public Turnos() {
     }
 
     public int getId() {
@@ -42,18 +46,18 @@ public class Turnos {
     }
 
     public Usuario getUsuario() {
-        return usuario;
+        return user;
     }
 
     public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+        this.user = usuario;
     }
 
-    public String getPortagem() {
-        return portagem_id;
+    public Portagem getPortagem() {
+        return portagem;
     }
 
-    public void setPortagem(String portagem) {
-        this.portagem_id = portagem;
+    public void setPortagem(Portagem portagem) {
+        this.portagem = portagem;
     }
 }

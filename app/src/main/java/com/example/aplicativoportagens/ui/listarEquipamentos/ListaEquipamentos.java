@@ -18,7 +18,7 @@ import com.example.aplicativoportagens.Controle.OcorenciasDAO;
 import com.example.aplicativoportagens.R;
 import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.Ocorencias;
-import com.example.aplicativoportagens.modelo.Usuario;
+import com.example.aplicativoportagens.modelo.Turnos;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,15 +30,15 @@ public class ListaEquipamentos extends Fragment {
     View view;
     String tela;
     int size = 12;
-    ArrayAdapter<Equipamentos> adapter;
-    ArrayList<Equipamentos> cameras;
+    ArrayAdapter<Equipamentos> equipamentosArrayAdapter;
+    ArrayList<Equipamentos> equipamentos1;
     Button enviarCheckList;
     private Context a;
     OcorenciasDAO ocorenciasDAO;
     Equipamentos equipamentos;
     EquipamentosDAO equipamentosDAO;
     Date date;
-    Usuario idUsuario;
+    Turnos turnos;
     private Ocorencias ocorencia;
     private boolean stop = false;
 
@@ -62,11 +62,11 @@ public class ListaEquipamentos extends Fragment {
         Intent intent = getActivity().getIntent();
         listView = view.findViewById(R.id.listview);
         equipamentosDAO = new EquipamentosDAO();
-        cameras = (ArrayList<Equipamentos>) equipamentosDAO.buscarTodos(tela,4);
-        adapter = new ArrayAdapter<Equipamentos>(a, android.R.layout.simple_list_item_multiple_choice, cameras);
-        listView.setAdapter(adapter);
+        turnos = (Turnos) intent.getSerializableExtra("nome");
+        equipamentos1 = (ArrayList<Equipamentos>) equipamentosDAO.buscarTodos(tela, turnos.getPortagem().getId());
+        equipamentosArrayAdapter = new ArrayAdapter<Equipamentos>(a, android.R.layout.simple_list_item_multiple_choice, equipamentos1);
+        listView.setAdapter(equipamentosArrayAdapter);
         date = new Date();
-        idUsuario = (Usuario) intent.getSerializableExtra("nome");
         atualizarTabela();
         }catch (Exception e){
             Log.e(TAG,e.getMessage());
@@ -92,18 +92,18 @@ public class ListaEquipamentos extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    for (int i = 0; i < cameras.size(); i++) {
+                    for (int i = 0; i < equipamentos1.size(); i++) {
                         equipamentos = (Equipamentos) listView.getItemAtPosition(i);
                         if (listView.isItemChecked(i)) {
                             ocorencia = new Ocorencias(0, "checklist"
                                     , "null", "Activo", "null"
-                                    , "null", date, idUsuario, equipamentos);
+                                    , "null", date, turnos.getUsuario(), equipamentos);
                             ocorenciasDAO.salvar(ocorencia);
 
                         } else {
                             ocorencia = new Ocorencias(0, "checklist"
                                     , "null", "Inactivo", "null"
-                                    , "null", date, idUsuario, equipamentos);
+                                    , "null", date, turnos.getUsuario(), equipamentos);
                             ocorenciasDAO.salvar(ocorencia);
                         }
                     }
@@ -122,8 +122,8 @@ public class ListaEquipamentos extends Fragment {
             @Override
             public void run() {
                 if(!stop) {
-                    if (cameras.size() != 0) {
-                        adapter.notifyDataSetChanged();
+                    if (equipamentos1.size() != 0) {
+                        equipamentosArrayAdapter.notifyDataSetChanged();
                         stop = true;
                     }
                 }

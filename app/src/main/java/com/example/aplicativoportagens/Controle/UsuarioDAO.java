@@ -1,6 +1,7 @@
 package com.example.aplicativoportagens.Controle;
 import android.util.Log;
 import com.example.aplicativoportagens.modelo.LogedUser;
+import com.example.aplicativoportagens.modelo.Turnos;
 import com.example.aplicativoportagens.modelo.Usuario;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,27 +12,27 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class UsuarioDAO {
     Usuario bairro;
 
-    public Usuario buscarUm(String username, String password) {
-        bairro = new Usuario();
+    public Turnos buscarUm(String username, String password) {
+        Turnos bairro = new Turnos();
 
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<LogedUser> call = apiInterface.getLogin(username,password);
-        call.enqueue(new Callback<LogedUser>() {
+        Call<Turnos> call = apiInterface.getLogin(username,password);
+        call.enqueue(new Callback<Turnos>() {
             @Override
-            public void onResponse(Call<LogedUser> call, Response<LogedUser> response) {
-                Log.e(TAG,"onResponse: "+response.code());
-                Usuario u = response.body().getUser();
+            public void onResponse(Call<Turnos> call, Response<Turnos> response) {
+                Turnos u = response.body();
                 if(u!=null) {
                     bairro.setId(u.getId());
-                    bairro.setNome(u.getNome());
-                    bairro.setUsername(u.getUsername());
-                    Log.e(TAG, "onResponse: email" + response.body().getStatus());
-                    Log.e(TAG, "onResponse: nome" + response.body().getUser().getNome());
+                    bairro.setUsuario(u.getUsuario());
+                    bairro.setPortagem(u.getPortagem());
+                    bairro.setData_inicio(u.getData_inicio());
+                    bairro.setHora_entrada_saida(u.getHora_entrada_saida());
+                    Log.e(TAG, "onResponse: email" + response.body().getId());
                 }
             }
 
             @Override
-            public void onFailure(Call<LogedUser> call, Throwable t) {
+            public void onFailure(Call<Turnos> call, Throwable t) {
                 Log.e(TAG, "onFailure: "+t.getMessage());
             }
         });

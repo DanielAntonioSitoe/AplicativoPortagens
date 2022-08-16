@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.aplicativoportagens.Controle.UsuarioDAO;
-import com.example.aplicativoportagens.modelo.Usuario;
+import com.example.aplicativoportagens.modelo.Turnos;
 
-public class logout extends AppCompatActivity {
-    Usuario usuario;
+public class Login extends AppCompatActivity {
+    Turnos turno;
     Boolean stop = false;
     UsuarioDAO usuarioDAO;
     TextView textError;
@@ -23,7 +23,7 @@ public class logout extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logout);
+        setContentView(R.layout.activity_login);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,7 +37,7 @@ public class logout extends AppCompatActivity {
         btnFragment3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usuario = usuarioDAO.buscarUm(username.getText().toString(),password.getText().toString());
+                turno = usuarioDAO.buscarUm(username.getText().toString(),password.getText().toString());
                 runtimer();
 
             }
@@ -50,10 +50,10 @@ public class logout extends AppCompatActivity {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if(usuario.getNome()!=null){
+                if(turno.getId()!=0){
                     if(!stop) {
-                        Intent intent = new Intent(logout.this, MainActivity.class);
-                        intent.putExtra("nome", usuario);
+                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        intent.putExtra("nome", turno);
                         username.setText("");
                         password.setText("");
                         textError.setText("");
@@ -62,7 +62,7 @@ public class logout extends AppCompatActivity {
                     }
                 }else {
                     textError.setText("Falha, Verifique os Dados!");
-                    usuario = usuarioDAO.getBairro();
+//                    usuario = usuarioDAO.getBairro();
                     stop = false;
                 }
                 handler.postDelayed(this,1000);
@@ -70,14 +70,6 @@ public class logout extends AppCompatActivity {
             }
         });
 
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     @Override

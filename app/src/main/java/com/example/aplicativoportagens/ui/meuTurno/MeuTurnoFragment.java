@@ -107,7 +107,7 @@ public class MeuTurnoFragment extends Fragment {
             try {
                 for (int j = 0; j < portagens.size(); j++) {
                     portagem =portagens.get(j);
-                    if(portagem.getId()==Integer.parseInt(turnos.get(i).getPortagem())){
+                    if(portagem.getId()==(turnos.get(i).getPortagem().getId())){
                         descricao.setText("Portagem:  "+portagem.getNome());
                     }
                 }

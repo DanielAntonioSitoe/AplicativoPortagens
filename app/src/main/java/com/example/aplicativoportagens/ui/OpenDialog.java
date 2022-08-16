@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import com.example.aplicativoportagens.logout;
+import com.example.aplicativoportagens.Login;
 
 public class OpenDialog extends AppCompatDialogFragment{
     @Override
@@ -17,7 +17,7 @@ public class OpenDialog extends AppCompatDialogFragment{
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(getActivity(), logout.class);
+                        Intent intent = new Intent(getActivity(), Login.class);
                         startActivity(intent);
                     }
                 });

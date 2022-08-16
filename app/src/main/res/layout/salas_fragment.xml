@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".ui.monitorar.salas">
 
     <LinearLayout
@@ -30,7 +31,7 @@
             android:id="@+id/salaControle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
+            android:layout_marginVertical="25dp"
             android:paddingVertical="20dp"
             android:background="@drawable/custom_button"
             android:textColor="@android:color/white"

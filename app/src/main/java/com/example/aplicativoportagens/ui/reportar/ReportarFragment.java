@@ -6,23 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.aplicativoportagens.Controle.EquipamentosDAO;
 import com.example.aplicativoportagens.Controle.OcorenciasDAO;
-import com.example.aplicativoportagens.Controle.SolicitacoesDAO;
 import com.example.aplicativoportagens.MainActivity;
 import com.example.aplicativoportagens.R;
-import com.example.aplicativoportagens.modelo.BuscarEquipamentos;
 import com.example.aplicativoportagens.modelo.Equipamentos;
 import com.example.aplicativoportagens.modelo.Ocorencias;
-import com.example.aplicativoportagens.modelo.Solicitacoes;
 import com.example.aplicativoportagens.modelo.Usuario;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -49,7 +42,7 @@ public class ReportarFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_reportar, container, false);
 
         mainActivity = (MainActivity) getActivity();
-        idUsuario = mainActivity.getIdUsuario();
+        idUsuario = mainActivity.getTurnos();
         ocorenciasDAO = new OcorenciasDAO();
 
         button = root.findViewById(R.id.enviarProblema);
