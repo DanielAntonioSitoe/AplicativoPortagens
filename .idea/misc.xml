@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/activity_login.xml" value="0.19375" />
         <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/activity_logout.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/app_bar_main.xml" value="0.20416666666666666" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/fragment_solicitacoes.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/lista_equipamentos_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/minhasnotificacoes.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/nav_header_main.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/notificacao_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/pistas_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/PC/Documents/GitHub/AplicativoPortagens/app/src/main/res/layout/salas_fragment.xml" value="0.20416666666666666" />

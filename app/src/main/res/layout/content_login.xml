@@ -10,13 +10,14 @@
     tools:showIn="@layout/activity_login">
 
     <LinearLayout
-        android:layout_width="248dp"
-        android:layout_height="428dp"
-        android:layout_marginTop="112dp"
+        android:layout_width="0px"
+        android:layout_height="0px"
         android:gravity="center"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.50"
+        app:layout_constraintWidth_percent="0.70"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,7 +25,7 @@
             android:id="@+id/textViewError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             android:gravity="center"
             android:text=""
             android:textColor="@android:color/holo_red_dark" />
@@ -49,7 +50,7 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text=" Senha"
             android:textColor="@android:color/black"
             android:textSize="18dp" />
@@ -63,11 +64,12 @@
 
         <Button
             android:id="@+id/login"
-            android:layout_width="200dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_button"
             android:text="Entrar"
+            android:textColor="@android:color/white"
             android:textSize="20dp" />
 
     </LinearLayout>

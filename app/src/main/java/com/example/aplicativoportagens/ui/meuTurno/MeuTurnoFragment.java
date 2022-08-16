@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -14,17 +13,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.aplicativoportagens.Controle.NotificacoesDAO;
 import com.example.aplicativoportagens.Controle.PortagemDAO;
 import com.example.aplicativoportagens.Controle.TurnosDAO;
 import com.example.aplicativoportagens.R;
 import com.example.aplicativoportagens.modelo.Portagem;
 import com.example.aplicativoportagens.modelo.Turnos;
-import com.example.aplicativoportagens.modelo.Usuario;
-import com.example.aplicativoportagens.ui.minhasNotificacoes.VerNotificacaoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +29,7 @@ public class MeuTurnoFragment extends Fragment {
     ListView listView;
     TurnosDAO turnosDAO;
     Intent intent;
-    Usuario usuario;
+    Turnos turnos1;
     View root;
     private boolean stop;
     PortagemDAO portagemDAO = new PortagemDAO();
@@ -55,10 +49,10 @@ public class MeuTurnoFragment extends Fragment {
         turnosDAO = new TurnosDAO();
         turnos = new ArrayList<>();
         stop = false;
-        usuario = (Usuario) intent.getSerializableExtra("nome");
+        turnos1 = (Turnos) intent.getSerializableExtra("nome");
         listView = root.findViewById(R.id.listviewTurnos);
         listView.setAdapter(customAdapter);
-        turnos = turnosDAO.buscarTodos(usuario.getId());
+        turnos = turnosDAO.buscarTodos(turnos1.getUsuario().getId());
         portagens = portagemDAO.buscarTodos();
         atualizarTabela();
 
@@ -101,18 +95,19 @@ public class MeuTurnoFragment extends Fragment {
 
             try {
                 tema.setText("Dia: "+turnos.get(i).getData_inicio().substring(0, 11) +"    Hora: "+ turnos.get(i).getHora_entrada_saida());
+                descricao.setText("Portagem:  "+turnos.get(i).getPortagem().getNome());
             }catch (Exception e){
-                tema.setText(turnos.get(i).getData_inicio() + turnos.get(i).getHora_entrada_saida());
+
             }
-            try {
-                for (int j = 0; j < portagens.size(); j++) {
-                    portagem =portagens.get(j);
-                    if(portagem.getId()==(turnos.get(i).getPortagem().getId())){
-                        descricao.setText("Portagem:  "+portagem.getNome());
-                    }
-                }
-            }catch (Exception e){
-            }
+//            try {
+//                for (int j = 0; j < portagens.size(); j++) {
+//                    portagem =portagens.get(j);
+//                    if(portagem.getId()==(turnos.get(i).getPortagem().getId())){
+//                        descricao.setText("Portagem:  "+portagem.getNome());
+//                    }
+//                }
+//            }catch (Exception e){
+//            }
             return view1;
         }
     }

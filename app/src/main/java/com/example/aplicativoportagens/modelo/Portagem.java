@@ -1,6 +1,8 @@
 package com.example.aplicativoportagens.modelo;
 
-public class Portagem {
+import java.io.Serializable;
+
+public class Portagem implements Serializable {
     int id;
     String nome;
     double cordenadaX;

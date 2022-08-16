@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.aplicativoportagens.Controle.NotificacoesDAO;
 import com.example.aplicativoportagens.R;
 import com.example.aplicativoportagens.modelo.Notificacoes;
+import com.example.aplicativoportagens.modelo.Turnos;
 import com.example.aplicativoportagens.modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class MinhasNotificacoesFragment extends Fragment {
     ListView listView;
     NotificacoesDAO notificacoesDAO;
     Intent intent;
-    Usuario usuario;
+    Turnos usuario;
     View root;
     private boolean stop;
 
@@ -45,10 +46,10 @@ public class MinhasNotificacoesFragment extends Fragment {
         notificacoesDAO = new NotificacoesDAO();
         notificacoes = new ArrayList<>();
         stop = false;
-        usuario = (Usuario) intent.getSerializableExtra("nome");
+        usuario = (Turnos) intent.getSerializableExtra("nome");
         listView = root.findViewById(R.id.listviewNotificacoes);
         listView.setAdapter(customAdapter);
-        notificacoes = notificacoesDAO.buscarTodos(usuario.getId());
+        notificacoes = notificacoesDAO.buscarTodos(usuario.getUsuario().getId());
         atualizarTabela();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

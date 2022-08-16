@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, MainActivity.class);
         intent.putExtra("nome", turnos);
         pendingIntent = PendingIntent.getActivity(this, 100, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        list = notificacoesDAO.buscarTodos(turnos.getId());
+        list = notificacoesDAO.buscarTodos(turnos.getUsuario().getId());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("APP Portagem", "APP Portagem", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
@@ -128,8 +128,10 @@ public class MainActivity extends AppCompatActivity {
             NavigationView navigationView = findViewById(R.id.nav_view);
             View heaerView = navigationView.getHeaderView(0);
             TextView userName = heaerView.findViewById(R.id.userName);
+            TextView userEmail= heaerView.findViewById(R.id.userEmail);
             TextView userPortagem = heaerView.findViewById(R.id.userPortagem);
-            userPortagem.setText(textPortagem);
+            userEmail.setText(turnos.getUsuario().getEmail());
+            userPortagem.setText(turnos.getPortagem().getNome());
             userName.setText(turnos.getUsuario().getNome());
             saveCheckIn();
         } catch (Exception e) {

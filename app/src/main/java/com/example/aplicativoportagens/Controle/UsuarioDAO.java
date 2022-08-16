@@ -10,10 +10,10 @@ import retrofit2.Response;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class UsuarioDAO {
-    Usuario bairro;
+    Turnos bairro;
 
     public Turnos buscarUm(String username, String password) {
-        Turnos bairro = new Turnos();
+        bairro = new Turnos();
 
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<Turnos> call = apiInterface.getLogin(username,password);
@@ -38,13 +38,13 @@ public class UsuarioDAO {
         });
         return bairro;
     }
-
-    public Usuario getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(Usuario bairro) {
-        this.bairro = bairro;
-    }
+//
+//    public Usuario getBairro() {
+//        return bairro;
+//    }
+//
+//    public void setBairro(Usuario bairro) {
+//        this.bairro = bairro;
+//    }
 
 }

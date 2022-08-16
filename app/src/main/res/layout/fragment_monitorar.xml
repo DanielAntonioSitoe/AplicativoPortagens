@@ -19,10 +19,11 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
     <LinearLayout
-        android:layout_width="248dp"
+        android:layout_width="0px"
         android:layout_height="428dp"
         android:gravity="center"
         android:orientation="vertical"
+        app:layout_constraintWidth_percent="0.60"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
             android:background="@drawable/custom_button"
-            android:paddingVertical="20dp"
+            android:paddingVertical="15dp"
             android:text="Salas"
             android:textColor="@android:color/white" />
 
@@ -44,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
             android:background="@drawable/custom_button"
-            android:paddingVertical="20dp"
+            android:paddingVertical="15dp"
             android:text="cabines"
             android:textColor="@android:color/white" />
 
@@ -54,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
             android:background="@drawable/custom_button"
-            android:paddingVertical="20dp"
+            android:paddingVertical="15dp"
             android:text="pistas"
             android:textColor="@android:color/white" />
 
@@ -64,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
             android:background="@drawable/custom_button"
-            android:paddingVertical="20dp"
+            android:paddingVertical="15dp"
             android:text="outros"
             android:textColor="@android:color/white" />
     </LinearLayout>

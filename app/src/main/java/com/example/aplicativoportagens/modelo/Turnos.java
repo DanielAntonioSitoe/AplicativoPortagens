@@ -3,7 +3,7 @@ package com.example.aplicativoportagens.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Turnos implements Serializable {
+public class Turnos implements Serializable{
     int id;
     String data_inicio;
     String hora_entrada_saida;
